@@ -1,0 +1,31 @@
+PER.,SIGLA,DISCIPLINA,CH,PRE REQ.
+1,XDES01,Fundamentos de Programação,4,-
+1,CRSC03,Arquitetura de Computadores I,4,-
+1,XMAC01,Matemática Discreta,4,-
+1,CAHC04,Projeto Integrado,2,-
+1,MAT00A,Cálculo A,4,-
+2,CTCO01,Algoritmos e Estrutura de Dados I,4,XDES01
+2,CRSC04,Arquitetura de Computadores II,4,CRSC03
+2,CMAC04,Modelagem Computacional,4,MAT00A
+2,MAT00B,Cálculo B,4,MAT00A
+3,XDES04,Engenharia de Software I,4,-
+3,XDES02,Programação Orientada a Objetos,4,XDES01
+3,CTCO02,Algoritmos e Estrutura de Dados II,4,"CTCO01"
+3,CRSC02,Sistemas Operacionais,4,"CTCO01, CRSC04"
+3,CMAC03,Algoritmos em Grafos,4,CTCO01
+3,XMAC02,Métodos Matemáticos para Análise de Dados,4,"MAT00A, XMAC01, CTCO01"
+4,XDES03,Programação Web,4,XDES02
+4,CTCO04,Projeto e Análise de Algoritmos,4,CTCO02
+4,XRSC01,Redes de Computadores,4,CRSC02
+4,CDES05,Programação Lógica e Funcional,4,XMAC01
+4,CRSC05,Sistemas Embarcados,4,CRSC02
+4,CMAC05,Cálculo Numérico para Computação,4,MAT00B
+5,CTCO05,Teoria da Computação,4,"CTCO04, CDES05"
+5,CTCO03,Análise e Projeto Orientados a Objetos,4,XDES02
+5,XPAD01,Banco de Dados I,4,CTCO02
+5,XMCO01,Inteligência Artificial,4,XMAC02
+5,CMCO05,Introdução à Computação Visual,4,"XMAC02, XDES02"
+6,CTCO06,Compiladores,4,CTCO05
+6,XAHC02,Interação Humano Computador,4,"XDES03, XDES04"
+6,XAHC01,Computação e Sociedade,4,-
+7,XAHC03,Metodologia Científica,4,-
