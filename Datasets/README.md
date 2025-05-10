@@ -1,0 +1,1 @@
+Datasets instanciados manualmente para o funcionamento da aplicação. As informações das matérias de cada curso foram obtidas diretamente do SIGAA.

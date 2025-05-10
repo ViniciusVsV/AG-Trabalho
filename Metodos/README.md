@@ -1,0 +1,1 @@
+Métodos utilizados durante o funcionamento da aplicação para o processamento de dados e geração de respostas ao usuário.
