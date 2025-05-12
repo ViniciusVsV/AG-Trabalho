@@ -1,1 +1,2 @@
 Datasets instanciados manualmente para o funcionamento da aplicação. As informações das matérias de cada curso foram obtidas diretamente do SIGAA.
+Os horários, porém, foram obtidos das matérias ofertadas no ano de 2024, visto que não é possível obter-se os horários para o ano atual, 2025.
