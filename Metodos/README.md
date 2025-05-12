@@ -9,7 +9,9 @@ A solução desenvolvida para o problema foi pensada em etapas e os méttodos or
         >Carga Horária;
         >Nome;
         >Pré Requisitos;
-        >Horários.
+        >Horários;
+        >Equivalentes;
+        >Curso.
 
     1° Passo -> Receber como input do usuário o seu histórico em forma de um arquivo pdf, pelo qual obter-se-á as matérias já concluídas e o curso do usuário. Deverá requisitar, também, um form com as preferências do usuário quanto às matérias optativas.
 

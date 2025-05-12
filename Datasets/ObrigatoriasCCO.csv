@@ -1,31 +1,31 @@
-PER.,SIGLA,DISCIPLINA,CH,PRE REQ.
-1,XDES01,Fundamentos de Programação,4,-
-1,CRSC03,Arquitetura de Computadores I,4,-
-1,XMAC01,Matemática Discreta,4,-
-1,CAHC04,Projeto Integrado,2,-
-1,MAT00A,Cálculo A,4,-
-2,CTCO01,Algoritmos e Estrutura de Dados I,4,XDES01
-2,CRSC04,Arquitetura de Computadores II,4,CRSC03
-2,CMAC04,Modelagem Computacional,4,MAT00A
-2,MAT00B,Cálculo B,4,MAT00A
-3,XDES04,Engenharia de Software I,4,-
-3,XDES02,Programação Orientada a Objetos,4,XDES01
-3,CTCO02,Algoritmos e Estrutura de Dados II,4,"CTCO01"
-3,CRSC02,Sistemas Operacionais,4,"CTCO01, CRSC04"
-3,CMAC03,Algoritmos em Grafos,4,CTCO01
-3,XMAC02,Métodos Matemáticos para Análise de Dados,4,"MAT00A, XMAC01, CTCO01"
-4,XDES03,Programação Web,4,XDES02
-4,CTCO04,Projeto e Análise de Algoritmos,4,CTCO02
-4,XRSC01,Redes de Computadores,4,CRSC02
-4,CDES05,Programação Lógica e Funcional,4,XMAC01
-4,CRSC05,Sistemas Embarcados,4,CRSC02
-4,CMAC05,Cálculo Numérico para Computação,4,MAT00B
-5,CTCO05,Teoria da Computação,4,"CTCO04, CDES05"
-5,CTCO03,Análise e Projeto Orientados a Objetos,4,XDES02
-5,XPAD01,Banco de Dados I,4,CTCO02
-5,XMCO01,Inteligência Artificial,4,XMAC02
-5,CMCO05,Introdução à Computação Visual,4,"XMAC02, XDES02"
-6,CTCO06,Compiladores,4,CTCO05
-6,XAHC02,Interação Humano Computador,4,"XDES03, XDES04"
-6,XAHC01,Computação e Sociedade,4,-
-7,XAHC03,Metodologia Científica,4,-
+PER.,SIGLA,DISCIPLINA,CH,PRE REQ.,ANUAL,HORARIOS,"EQUIVALENTES (SIN, ECO)",CURSO
+1,XDES01,Fundamentos de Programação,64,-,Sim,34M45,"XDES01, ECOP11A",CCO
+1,CRSC03,Arquitetura de Computadores I,64,-,Sim,35T34,"-, (ELTD01A, ELTD11A)",CCO
+1,XMAC01,Matemática Discreta,64,-,Sim,34M23,"XMAC01, (ECOM01A, ECOM11A)",CCO
+1,CAHC04,Projeto Integrado,32,-,Sim,5T12,"-, -",CCO
+1,MAT00A,Cálculo A,64,-,Sim,2T34 4T12,"MAT00A, MAT00A",CCO
+2,CTCO01,Algoritmos e Estrutura de Dados I,64,XDES01,Sim,46T12,"STCO01, ECOP02A",CCO
+2,CRSC04,Arquitetura de Computadores II,64,CRSC03,Sim,35T12,"-, ECOX01",CCO
+2,CMAC04,Modelagem Computacional,64,MAT00A,Sim,45T34,"-, -",CCO
+2,MAT00B,Cálculo B,64,MAT00A,Sim,2M23 4M45,"-, MAT00B",CCO
+3,XDES04,Engenharia de Software I,64,-,Sim,2T34 4M45,"XDES04, (ECOT01A, ECOT11A)",CCO
+3,XDES02,Programação Orientada a Objetos,64,XDES01,Sim,35T34,"XDES02, ECOP13A",CCO
+3,CTCO02,Algoritmos e Estrutura de Dados II,64,CTCO01,Sim,2T12 4T34,"STCO02, -",CCO
+3,CRSC02,Sistemas Operacionais,64,"CTCO01, CRSC04",Sim,35T12,"-, (ECOS01A, ECOS11A)",CCO
+3,CMAC03,Algoritmos em Grafos,64,CTCO01,Sim,3M45 5M23,"SMAC03, -",CCO
+3,XMAC02,Métodos Matemáticos para Análise de Dados,64,"MAT00A, XMAC01, CTCO01",Sim,46T12,"XMAC02, -",CCO
+4,XDES03,Programação Web,64,XDES02,Não,3T12 5T34,"XDES03, ECOX05",CCO
+4,CTCO04,Projeto e Análise de Algoritmos,64,CTCO02,Sim,2T34 5M45,"-, -",CCO
+4,XRSC01,Redes de Computadores,64,CRSC02,Sim,25T12,"XRSC01, (TELC03A, TELC13A)",CCO
+4,CDES05,Programação Lógica e Funcional,64,XMAC01,Sim,4T34 6T12,"-, -",CCO
+4,CRSC05,Sistemas Embarcados,64,CRSC02,Sim,3M2345,"-, ECOX01",CCO
+4,CMAC05,Cálculo Numérico para Computação,64,MAT00B,Sim,3T34 4T12,"-, -",CCO
+5,CTCO05,Teoria da Computação,64,"CTCO04, CDES05",Sim,3M45 6M23,"-, -",CCO
+5,CTCO03,Análise e Projeto Orientados a Objetos,64,XDES02,Sim,4M23 6M45,"-, -",CCO
+5,XPAD01,Banco de Dados I,64,CTCO02,Sim,4T12 QM45,"XPAD01, (ECOT03A, ECOT13A)",CCO
+5,XMCO01,Inteligência Artificial,64,XMAC02,Sim,35T12,"XMACO01, -",CCO
+5,CMCO05,Introdução à Computação Visual,64,"XMAC02, XDES02",Sim,56T34,"-, -",CCO
+6,CTCO06,Compiladores,64,CTCO05,Sim,2T34 5M45,"-, -",CCO
+6,XAHC02,Interação Humano Computador,64,"XDES03, XDES04",Sim,23T12,"XAHC02, -",CCO
+6,XAHC01,Computação e Sociedade,64,-,Sim,4N1234,"XAHC01, -",CCO
+7,XAHC03,Metodologia Científica,64,-,Sim,56T12,"XAHC03, -",CCO
