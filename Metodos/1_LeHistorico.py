@@ -1,9 +1,7 @@
-import pandas as pd
-import re
-
-def LeHistorico():
+def LeHistorico(historico):
     """
-    Obtem as matérias realizadas pelo usuário a partir do arquivo pdf inserido.
+    Recebe o arquivo pdf que representa o histórico do aluno.
+    Obtém, a partir desse arquivo, o curso do discente e todas as matérias já cursadas.
     
     Retorna:
         Curso do usuário.
