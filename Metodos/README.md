@@ -26,3 +26,5 @@ A solução desenvolvida para o problema foi pensada em etapas e os méttodos or
     5° Passo -> Montar um novo grafo simples a partir das matérias restantes do dataset. As arestas desse novo grafo irão representar matérias que possuem conflitos de horários entre si.
 
     6° Passo -> Calcular os Conjuntos Independentes Máximos do grafo simples. Também ter como base parâmetros passados pelo usuário, como limite de carga semestral e horários preferidos. Retornar, então, os conjuntos máximos encontrados, como no máximo 5.
+
+LeHistorico.py -> InstanciaGrafoDirigido.py -> CalculaPesos.py -> FiltaDataframe.py -> matrizAdjSimples.py -> CalculaCIM.py
