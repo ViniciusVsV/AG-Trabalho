@@ -178,3 +178,14 @@ class PreRequisito:
             bool: True se o pré-requisito foi atendido, False caso contrário.
         """
         return self.__expression.evaluate(taken_courses)
+    
+    def contem(self, sigla: str) -> bool:
+        """
+        Verifica se uma matéria é um pré-requisito.
+        Args:
+            sigla (str): Sigla da matéria a ser analisada.
+        Returns:
+            bool: True se a matéria é um pré-requisito, False caso contrário.
+        """
+    
+        raise NotImplementedError()

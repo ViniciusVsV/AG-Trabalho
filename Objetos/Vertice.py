@@ -2,9 +2,10 @@ from .Horario import Horario
 from .PreRequisito import PreRequisito
 
 class Vertice:
-    def __init__(self, sigla: str, nome: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str):
+    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str):
         self.sigla = sigla
         self.nome = nome
+        self.curso = curso
         self.categoria = categoria
         self.semestre = semestre
         self.anualidade = anualidade == 'SIM'

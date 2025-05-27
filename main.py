@@ -1,4 +1,4 @@
-from Metodos import matrizAdjSimples
+from Metodos import MontaMatrizAdjSimples, MontaMatrizAdjDirigida
 from Objetos import Vertice
 import pandas as pd
 
@@ -12,6 +12,7 @@ if __name__ == "__main__":
         vertice = Vertice(
             sigla=row['SIGLA'],
             nome=row['NOME'],
+            curso=row['CURSO'],
             categoria=row['CAT.'],
             semestre=row['PER.'],
             anualidade=row['AN.'],
@@ -21,7 +22,7 @@ if __name__ == "__main__":
         )
         vertices.append(vertice)
     
-    matriz = matrizAdjSimples(vertices)
+    matriz = MontaMatrizAdjSimples(vertices)
 
     for i, vertice in enumerate(vertices):
         print(f"{vertice.sigla} - {vertice.nome}: {vertice.horarios}")

@@ -1,9 +1,9 @@
 import pytest
-from Metodos.matrizAdjSimples import matrizAdjSimples
+from Metodos.MontaMatrizAdjSimples import MontaMatrizAdjSimples
 from Objetos.Vertice import Vertice
 import pandas as pd
 
-@pytest.mark.parametrize("dataframeFiltrado, expected", [
+@pytest.mark.parametrize("disciplinasFiltradas, expected", [
     (
         [
             Vertice("MAT101", "Matemática I", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-"),
@@ -39,6 +39,6 @@ import pandas as pd
         ]
     ),
 ])
-def test_matriz_adj_simples(dataframeFiltrado, expected):
-    matriz = matrizAdjSimples(dataframeFiltrado)
-    assert matriz == expected, f"Esperado {expected}, mas obteve {matriz} para {dataframeFiltrado}"
+def test_matriz_adj_simples(disciplinasFiltradas, expected):
+    matriz = MontaMatrizAdjSimples(disciplinasFiltradas)
+    assert matriz == expected, f"Esperado {expected}, mas obteve {matriz} para {disciplinasFiltradas}"
