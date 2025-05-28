@@ -1,6 +1,6 @@
 from .FiltraDisciplinas import FiltraDisciplinas
 
-from .MontaMatrizAdjDirigida import MontaMatrizAdjDirigida
-from .MontaMatrizAdjSimples import MontaMatrizAdjSimples
+from .MontaListaAdjDirigida import MontaListaAdjDirigida
+from .MontaListaAdjSimples import MontaListaAdjSimples
 
 from .GeraGrafo import GeraGrafo

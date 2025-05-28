@@ -3,11 +3,11 @@ from Objetos import Vertice
 from igraph import Graph, plot
 import os
 
-def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> Graph:
+def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> Graph:
     """
-    Gera e salva uma grafo, simples ou dirigido, a partir da matriz de adjacencia recebida
+    Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia recebida
     Args:
-        matrizAdj (list[list[int]]): Matriz de adjacência do grafo a ser construído.
+        listaAdj (list[list[int]]): Lista de adjacência do grafo a ser construído.
         disciplinas (list[Vertice]): Lista das disciplinas que serão incluidas no grafo.
         dirigido (bool):  Booleana que dita se o grafo é dirigido ou não
 
@@ -39,23 +39,24 @@ def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: 
     grafo.vs["color"] = cores
 
     # Adiciona as arestas
-    quantidadeVertices = len(matrizAdj)
-
     if dirigido == True:
-        for i in range(quantidadeVertices):
-            for j in range(quantidadeVertices):
-                if matrizAdj[i][j] == 1:
-                    grafo.add_edge(siglasPrefixos[j], siglasPrefixos[i])
+        for i in range(len(listaAdj)):
+            for j in listaAdj[i]:
+                grafo.add_edge(siglasPrefixos[j], siglasPrefixos[i])
 
     else:
-        for i in range(quantidadeVertices):
-            for j in range(i):
-                if matrizAdj[i][j] == 1:
+        for i in range(len(listaAdj)):
+            for j in listaAdj[i]:
+                if i < j:
                     grafo.add_edge(siglasPrefixos[i], siglasPrefixos[j])
 
     # Desenha o grafo e salva a imagem dele em um arquivo
-    if dirigido:    layout = grafo.layout("tree")
-    else:           layout = grafo.layout("fr")
+    if dirigido:    
+        layout = grafo.layout("tree")
+        print("GERANDO GRAFO DIRIGIDO")
+    else:           
+        layout = grafo.layout("fr")
+        print("GERANDO GRAFO SIMPLES")
 
     caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{id}")
     os.makedirs(caminhoDiretorio, exist_ok = True)

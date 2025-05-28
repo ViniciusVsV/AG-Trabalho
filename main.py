@@ -1,4 +1,4 @@
-from Metodos import MontaMatrizAdjSimples, MontaMatrizAdjDirigida, GeraGrafo, FiltraDisciplinas
+from Metodos import MontaListaAdjDirigida, MontaListaAdjSimples, GeraGrafo, FiltraDisciplinas
 from Objetos import Vertice
 import pandas as pd
 
@@ -26,17 +26,17 @@ if __name__ == "__main__":
         )
         vertices.append(vertice)
 
-    matriz = MontaMatrizAdjDirigida(vertices)
+    listaAdj = MontaListaAdjDirigida(vertices)
 
-    GeraGrafo(matriz, vertices, True, 1)
+    GeraGrafo(listaAdj, vertices, True, 1)
 
     vazio = set()
 
     disciplinasFiltradas = FiltraDisciplinas(vertices, vazio, 1)
 
-    matriz2 = MontaMatrizAdjSimples(disciplinasFiltradas)
+    listaAdj2 = MontaListaAdjSimples(disciplinasFiltradas)
 
-    GeraGrafo(matriz2, disciplinasFiltradas, False, 1)
+    GeraGrafo(listaAdj2, disciplinasFiltradas, False, 1)
 
     for i in range(len(disciplinasFiltradas)):
         print(disciplinasFiltradas[i].nome)
