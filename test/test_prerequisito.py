@@ -62,3 +62,49 @@ def test_prerequisito_invalid_expression(prereq_str):
     """
     with pytest.raises(ValueError):
         PreRequisito(prereq_str)
+
+@pytest.mark.parametrize("prereq_str,course,expected", [
+    # Sem pré-requisito
+    ("-", "", False),
+    ("-", "XDES01", False),
+    # Curso único
+    ("XDES01", "", False),
+    ("XDES01", "XDES01", True),
+    ("XDES01", "OTHER", False),
+    # Combinação OR
+    ("CTCO01 OU STCO01", "", False),
+    ("CTCO01 OU STCO01", "CTCO01", True),
+    ("CTCO01 OU STCO01", "STCO01", True),
+    ("CTCO01 OU STCO01", "OTHER", False),
+    # Combinação com parênteses
+    ("(CTCO01 OU STCO01) E CRSC04", "", False),
+    ("(CTCO01 OU STCO01) E CRSC04", "CTCO01", True),
+    ("(CTCO01 OU STCO01) E CRSC04", "STCO01", True),
+    ("(CTCO01 OU STCO01) E CRSC04", "CRSC04", True),
+    ("(CTCO01 OU STCO01) E CRSC04", "OTHER", False),
+    # Expressão complexa
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "MAT00A", True),
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "XMAC01", True),
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "CTCO01", True),
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "STCO01", True),
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "OTHER", False),
+    ("MAT00A E XMAC01 E (CTCO01 OU STCO01)", "", False),
+    # Múltiplos ANDs
+    ("MAT00A E XMAC01 E CRSC04", "MAT00A", True),
+    ("MAT00A E XMAC01 E CRSC04", "XMAC01", True),
+    ("MAT00A E XMAC01 E CRSC04", "CRSC04", True),
+    ("MAT00A E XMAC01 E CRSC04", "", False),
+    ("MAT00A E XMAC01 E CRSC04", "OTHER", False),
+    # Múltiplos ORs
+    ("CTCO01 OU STCO01 OU CRSC04", "CTCO01", True),
+    ("CTCO01 OU STCO01 OU CRSC04", "STCO01", True),
+    ("CTCO01 OU STCO01 OU CRSC04", "CRSC04", True),
+    ("CTCO01 OU STCO01 OU CRSC04", "", False),
+    ("CTCO01 OU STCO01 OU CRSC04", "OTHER", False)
+])
+def test_prerequisito_contem(prereq_str, course, expected):
+    """
+    Testa o método contem para verificar se um curso específico está nos pré-requisitos.
+    """
+    prereq = PreRequisito(prereq_str)
+    assert prereq.contem(course) == expected, f"Falha para {prereq_str} com {course}. {prereq.pre_reqset}"

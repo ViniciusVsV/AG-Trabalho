@@ -102,13 +102,21 @@ class PreRequisito:
     """
     def __init__(self, pre_requisito: str):
         self.__pre_requisito = pre_requisito
+        self.__pre_reqset = set()
 
         if pre_requisito.strip() == '-':
             self.__expression = TrueExpression()
         else:
             self.__tokenize()
 
-        self.expression = self.__expression
+    @property
+    def pre_reqset(self) -> set[str]:
+        """
+        Retorna o conjunto de pré-requisitos.
+        Returns:
+            set: Conjunto de pré-requisitos.
+        """
+        return self.__pre_reqset
 
     def __tokenize(self):
         """
@@ -145,6 +153,7 @@ class PreRequisito:
                     raise ValueError("Operador 'OU' não pode ser o primeiro token")
                 current = Or(current, None)
             else:
+                self.__pre_reqset.add(token)
                 if current is None:
                     current = Leaf(token)
                 elif not isinstance(current, Leaf):
@@ -188,4 +197,4 @@ class PreRequisito:
             bool: True se a matéria é um pré-requisito, False caso contrário.
         """
     
-        raise NotImplementedError()
+        return sigla in self.pre_reqset

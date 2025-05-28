@@ -15,7 +15,7 @@ class Vertice:
         
         self.Peso: int = None
 
-    
+
     def verificaHorarioConflitante(self, outro: 'Vertice') -> bool:
         """
         Verifica se há conflito de horários entre dois vértices.
@@ -27,3 +27,15 @@ class Vertice:
         """
         
         return self.horarios.isConflitante(outro.horarios)
+
+    def isPreRequisito(self, outro: 'Vertice') -> bool:
+        """
+        Verifica se o vértice atual é pré-requisito do outro vértice.
+
+        Args:
+            outro (Vertice): Outro vértice para verificar os pré-requisitos.
+        Returns:
+            bool: True se o pré-requisito for atendido, False caso contrário.
+        """
+
+        return self.preReq.contem(outro.sigla)
