@@ -9,7 +9,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
         Lista de vértices representando as matérias pertinentes ao caso de uso.
     """
 
-    disciplinasFiltradas = disciplinas
+    disciplinasFiltradas = disciplinas.copy()
     
     for disciplina in disciplinas:
         # Filtra da lista as matérias que não estão sendo ofertadas
@@ -21,7 +21,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
             disciplinasFiltradas.remove(disciplina)
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos
-        elif not preRequisitos.verifica(disciplinasCumpridas):
+        elif not disciplina.preReq.verifica(disciplinasCumpridas):
             disciplinasFiltradas.remove(disciplina)
 
     return disciplinasFiltradas
