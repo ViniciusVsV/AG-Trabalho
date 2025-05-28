@@ -21,10 +21,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
             disciplinasFiltradas.remove(disciplina)
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos
-        else:
-            preRequisitos = PreRequisito(disciplina.preReq)
-
-            if not preRequisitos.verifica(disciplinasCumpridas):
-                disciplinasFiltradas.remove(disciplina)
+        elif not preRequisitos.verifica(disciplinasCumpridas):
+            disciplinasFiltradas.remove(disciplina)
 
     return disciplinasFiltradas

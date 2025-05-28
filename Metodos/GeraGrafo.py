@@ -1,8 +1,9 @@
 from Objetos import Vertice
 
-from igraph import Graph
+from igraph import Graph, plot
+import os
 
-def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool) -> None:
+def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> Graph:
     """
     Gera e salva uma grafo, simples ou dirigido, a partir da matriz de adjacencia recebida
     Args:
@@ -11,7 +12,7 @@ def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: 
         dirigido (bool):  Booleana que dita se o grafo é dirigido ou não
 
     Retorna:
-        
+        Grafo produzido com igraph
     """
 
     grafo = Graph(directed = dirigido)
@@ -52,8 +53,28 @@ def GeraGrafo(matrizAdj: list[list[int]], disciplinas: list[Vertice], dirigido: 
                 if matrizAdj[i][j] == 1:
                     grafo.add_edge(siglasPrefixos[i], siglasPrefixos[j])
 
-    # Desenha o grafo
+    # Desenha o grafo e salva a imagem dele em um arquivo
+    if dirigido:    layout = grafo.layout("tree")
+    else:           layout = grafo.layout("fr")
 
+    caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{id}")
+    os.makedirs(caminhoDiretorio, exist_ok = True)
 
-    # Salva a imagem produzida
+    nomeImagem = "Grafo_Pre_Requisitos.png" if dirigido else "Grafo_Conflitos_Horarios.png"
+
+    diretorio = os.path.abspath(os.path.join(caminhoDiretorio, nomeImagem))
+
+    plot(
+        grafo,
+        layout = layout,
+        vertex_label = siglasNormais,
+        vertex_color = grafo.vs["color"],
+        vertex_size = 60,
+        edge_color = "gray",
+        bbox = (2000, 2000),
+        margin = 50,
+        target = diretorio
+    )
+
+    return grafo
     
