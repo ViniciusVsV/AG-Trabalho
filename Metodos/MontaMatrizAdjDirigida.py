@@ -18,7 +18,7 @@ def MontaMatrizAdjDirigida(disciplinas: list[Vertice]) -> list[list[int]]:
     # Preenche a matriz de adjacência com as relações de dependência
     for i in range(n):
         for j in range(i + 1, n):
-            if preRequisitos.contem(disciplinas[i].sigla):
+            if disciplinas[j].preReq.contem(disciplinas[i].sigla):
                 matrizAdj[i][j] = 1
 
     return matrizAdj
