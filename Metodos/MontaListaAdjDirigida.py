@@ -15,10 +15,10 @@ def MontaListaAdjDirigida(disciplinas: list[Vertice]) -> list[list[int]]:
     n = len(disciplinas)
     listaAdj = [[] for _ in range(n)]
 
-    # Preenche a lista de adjacência com as relações de dependência
+    # Preenche a lista de adjacência com as relações de dependência de forma invertida
     for i in range(n):
         for j in range(i + 1, n):
             if disciplinas[j].isPreRequisito(disciplinas[i]):
-                listaAdj[i].append(j)
+                listaAdj[j].append(i)
 
     return listaAdj

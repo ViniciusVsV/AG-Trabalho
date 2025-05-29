@@ -13,7 +13,7 @@ class Vertice:
         self.cargaHor = cargaHor
         self.preReq = PreRequisito(preReq)
         
-        self.Peso: int = 0
+        self.peso: float = 1.0
 
 
     def verificaHorarioConflitante(self, outro: 'Vertice') -> bool:

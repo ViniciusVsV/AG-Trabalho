@@ -1,4 +1,4 @@
-from Metodos import MontaListaAdjDirigida, MontaListaAdjSimples, GeraGrafo, FiltraDisciplinas
+from Metodos import MontaListaAdjDirigida, MontaListaAdjSimples, GeraGrafo, FiltraDisciplinas, CalculaPesos
 from Objetos import Vertice
 import pandas as pd
 
@@ -27,6 +27,11 @@ if __name__ == "__main__":
         vertices.append(vertice)
 
     listaAdj = MontaListaAdjDirigida(vertices)
+
+    verticesComPesos = CalculaPesos(listaAdj, vertices)
+
+    for vertice in verticesComPesos:
+        print(vertice.nome + " --- " + str(vertice.peso))
 
     GeraGrafo(listaAdj, vertices, True, 1)
 

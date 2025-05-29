@@ -9,10 +9,10 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
     Args:
         listaAdj (list[list[int]]): Lista de adjacência do grafo a ser construído.
         disciplinas (list[Vertice]): Lista das disciplinas que serão incluidas no grafo.
-        dirigido (bool):  Booleana que dita se o grafo é dirigido ou não
+        dirigido (bool):  Booleana que dita se o grafo é dirigido ou não.
 
     Retorna:
-        Grafo produzido com igraph
+        Grafo produzido com igraph.
     """
 
     grafo = Graph(directed = dirigido)
@@ -42,7 +42,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
     if dirigido == True:
         for i in range(len(listaAdj)):
             for j in listaAdj[i]:
-                grafo.add_edge(siglasPrefixos[j], siglasPrefixos[i])
+                grafo.add_edge(siglasPrefixos[i], siglasPrefixos[j])
 
     else:
         for i in range(len(listaAdj)):
