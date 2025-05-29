@@ -1,5 +1,4 @@
 from Objetos import Vertice
-from Objetos import PreRequisito
 
 def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str], periodoAtual: int) -> list[Vertice]:
     """
@@ -17,7 +16,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
             disciplinasFiltradas.remove(disciplina)
 
         # Fitlra da lista as matérias que já foram concluidas
-        elif disciplina in disciplinasCumpridas:
+        elif disciplina.sigla in disciplinasCumpridas:
             disciplinasFiltradas.remove(disciplina)
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos

@@ -21,9 +21,10 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
     siglasPrefixos = []
     siglasNormais = []
     cores = []
+    i = 0
     
     for disciplina in disciplinas:
-        siglasPrefixos.append(disciplina.curso + "_" + disciplina.sigla)
+        siglasPrefixos.append(str(i) + "_" + disciplina.sigla)
         siglasNormais.append(disciplina.sigla)
 
         cores.append(
@@ -32,6 +33,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
             "orange"
         )
 
+        i += 1
 
     grafo.add_vertices(siglasPrefixos)  
 
@@ -51,12 +53,8 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
                     grafo.add_edge(siglasPrefixos[i], siglasPrefixos[j])
 
     # Desenha o grafo e salva a imagem dele em um arquivo
-    if dirigido:    
-        layout = grafo.layout("tree")
-        print("GERANDO GRAFO DIRIGIDO")
-    else:           
-        layout = grafo.layout("fr")
-        print("GERANDO GRAFO SIMPLES")
+    if dirigido:    layout = grafo.layout("tree")
+    else:           layout = grafo.layout("fr")
 
     caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{id}")
     os.makedirs(caminhoDiretorio, exist_ok = True)

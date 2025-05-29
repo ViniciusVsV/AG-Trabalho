@@ -1,7 +1,5 @@
 from Objetos import Vertice
 
-import numpy as np
-
 def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Vertice]) -> list[Vertice]:
     """
     Calcula os pesos dos vértices do grafo dirigido recebido com uma BFS.
@@ -26,15 +24,15 @@ def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Vertice]) -> list[
 
     # Inicia a DFS multínicio a partir dos vértices iniciais
     for indiceV in indicesVerticesIniciais:
-        DFS(indiceV, listaAdj, disciplinas, 0.0)
+        DFS(indiceV, listaAdj, disciplinas, 1.0)
 
     return disciplinas
 
 def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Vertice], pesoPropagado: float):
-    # Soma o peso base ao peso propagado vezes os multiplicadores
-    # peso += pesoPropagado * multiplicadorAnualidade * multiplicadorCategoria
+    # Obtém os multiplicadores de pesos
     [multiplicadorAnualidade, multiplicadorCategoria] = ObtemMultiplicadores(disciplinas[indiceV])
 
+    # Soma o peso base ao peso propagado vezes os multiplicadores
     disciplinas[indiceV].peso += pesoPropagado * multiplicadorAnualidade * multiplicadorCategoria
 
     # Chama a DFS para os adjacentes, com o peso propagado sendo o peso calculado para o vértice atual
@@ -56,7 +54,7 @@ def ObtemMultiplicadores(disciplina: Vertice) -> tuple[float, float]:
     multiplicadorCategoria = (
         1.0 if disciplina.categoria == "OBRIGATORIA"
         else 0.9 if disciplina.categoria == "EQUIVALENTE"
-        else 0.8
+        else 0.7
     )
 
     return (multiplicadorAnualidade, multiplicadorCategoria)
