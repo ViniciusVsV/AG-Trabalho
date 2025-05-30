@@ -3,7 +3,7 @@ from Objetos import Vertice
 from igraph import Graph, plot
 import os
 
-def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> Graph:
+def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> tuple[Graph, str]:
     """
     Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia recebida
     Args:
@@ -75,5 +75,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
         target = diretorio
     )
 
-    return grafo
+    mensagem = "Grafo salvo em Imagens/Teste_" + str(id) + "/" + nomeImagem
+
+    return grafo, mensagem
     

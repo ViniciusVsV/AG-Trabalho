@@ -3,7 +3,11 @@ from Objetos import Vertice
 def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str], periodoAtual: int) -> list[Vertice]:
     """
     Filtra a lista de todas as disciplinas recebida, removendo todas as matérias obsoletas para o caso de uso.
-
+    Args:
+        disciplinas (list[Vertice]): Lista de todas as disciplinas do curso.
+        disciplinasCumpridas (set[str]): Set com as disciplinas já cursadas pelo discente.
+        periodoAtual (int): Período do ano para o qual a previsão será feita (1 ou 2).
+    
     Retorna:
         Lista de vértices representando as matérias pertinentes ao caso de uso.
     """

@@ -52,9 +52,9 @@ def ObtemMultiplicadores(disciplina: Vertice) -> tuple[float, float]:
     multiplicadorAnualidade = 1.2 if disciplina.anualidade == "SIM" else 1.0
 
     multiplicadorCategoria = (
-        1.0 if disciplina.categoria == "OBRIGATORIA"
-        else 0.9 if disciplina.categoria == "EQUIVALENTE"
-        else 0.7
+        1.2 if disciplina.categoria == "OBRIGATORIA"
+        else 0.8 if disciplina.categoria == "EQUIVALENTE"
+        else 0.6
     )
 
     return (multiplicadorAnualidade, multiplicadorCategoria)
