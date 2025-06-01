@@ -1,56 +1,88 @@
-from Metodos import MontaListaAdjDirigida, MontaListaAdjSimples, GeraGrafo, FiltraDisciplinas, CalculaPesos
+from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraDisciplinas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
 from Objetos import Vertice
+
 import pandas as pd
+import uuid
 
-# Isso é só pra teste, modifiquem como quiserem
 if __name__ == "__main__":
-    ds = pd.read_csv(
-        'Datasets/DisciplinasCCO.csv',
-        na_values=[],            
-        keep_default_na=False
-    )
+    while True:
+        realizarTeste = input("Deseja realizar um teste (S/N)? ")
 
-    vertices = []
-    qtdSemestres = 8
+        if realizarTeste != "S" and realizarTeste != "s" and realizarTeste != "N" and realizarTeste != "n":
+            print("Digita certo seu jumento")
+            continue
 
-    for index, row in ds.iterrows():
-        vertice = Vertice(
-            sigla       =   row['SIGLA'],
-            nome        =   row['NOME'],
-            curso       =   row['CURSO'],
-            categoria   =   row['CAT.'],
-            semestre    =   row['PER.'],
-            anualidade  =   row['AN.'],
-            horarios    =   row['HOR.'],
-            cargaHor    =   row['CH'],
-            preReq      =   row['REQ.'],
+        elif realizarTeste == "N" or realizarTeste == "n":
+            break
 
-            peso        =   qtdSemestres - row['PER.'] + 1
-        )
-        vertices.append(vertice)  
+        else:
+            id = str(uuid.uuid4())
 
-    listaAdj = MontaListaAdjDirigida(vertices)
+            # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
+            # Atualmente usando input. Temporário
+            curso = str(input("Digite o seu curso (CCO/SIN): "))
+            if curso != "CCO" and curso != "SIN":
+                print("Mas ce é burro hein")
+                continue
 
-    verticesComPesos = CalculaPesos(listaAdj, vertices)
+            disciplinasCumpridas = set()
+            preferenciasOptativas = []
+            
+            nPeriodos = 8
 
-    #for vertice in verticesComPesos:
-    #    print(vertice.nome + " --- " + str(vertice.peso))
+            semestrePrevisao = int(input("Digite o semestre do ano para previsão (1/2): "))
+            if semestrePrevisao != 1 and semestrePrevisao != 2:
+                print("Digita certo carai")
+                continue
 
-    #verticesOrdenados = sorted(verticesComPesos, key=lambda v: v.peso, reverse=True)
-    #for vertice in verticesOrdenados:
-    #    print(vertice.nome + " --- " + str(vertice.peso))
+            # Lê o dataset pertinente
+            dataframe = pd.read_csv(
+                "Datasets/Disciplinas" + curso + ".csv" ,
+                na_values=[],            
+                keep_default_na=False
+            )
 
-    GeraGrafo(listaAdj, verticesComPesos, True, 3)
+            # Cria o array das disciplinas do curso
+            disciplinas = []
 
-    vazio = set()
+            for index, row in dataframe.iterrows():
+                disciplina = Vertice(
+                    sigla       =   row['SIGLA'],
+                    nome        =   row['NOME'],
+                    curso       =   row['CURSO'],
+                    categoria   =   row['CAT.'],
+                    semestre    =   row['PER.'],
+                    anualidade  =   row['AN.'],
+                    horarios    =   row['HOR.'],
+                    cargaHor    =   row['CH'],
+                    preReq      =   row['REQ.'],
 
-    disciplinasFiltradas = FiltraDisciplinas(verticesComPesos, vazio, 1)
+                    peso        =   nPeriodos - row['PER.'] + 1
+                )
+                disciplinas.append(disciplina) 
 
-    ordenado = sorted(disciplinasFiltradas, key=lambda d: d.peso, reverse=True)
+            # Constrói o grafo de pré-requisitos 
+            listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
 
-    for d in ordenado:
-        print(d.sigla + " " + d.nome + " - " + d.categoria + " --- " + str(d.peso))
+            GeraGrafo(listaAdjDirigida, disciplinas, True, id, curso)
 
-    listaAdj2 = MontaListaAdjSimples(disciplinasFiltradas)
+            # Calcula os pesos das disciplinas
+            disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
 
-    GeraGrafo(listaAdj2, disciplinasFiltradas, False, 3)
+            # Filtra as disciplinas
+            disciplinasFiltradas = FiltraDisciplinas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+
+            # Constrói o grafo de conflitos de horários
+            listaAdjSimples = MontaListaAdjSimples(disciplinasFiltradas)
+
+            GeraGrafo(listaAdjSimples, disciplinasFiltradas, False, id, curso)
+
+            # Calcula os conjuntos independentes
+
+
+            # Retorna o resultado ao usuário
+            # Atualmente só printa as disciplinas e seus pesos. Temporário
+            pesosOrdenados = sorted(disciplinasFiltradas, key=lambda d: d.peso, reverse=True)
+
+            for p in pesosOrdenados:
+                print(p.sigla, "-", p.nome, "--", p.categoria, "---", p.curso, "----", p.peso)

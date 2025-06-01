@@ -1,5 +1,4 @@
 from Objetos import Vertice
-from Objetos import PreRequisito
 
 def MontaListaAdjDirigida(disciplinas: list[Vertice]) -> list[list[int]]:
     """

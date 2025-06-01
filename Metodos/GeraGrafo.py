@@ -3,7 +3,7 @@ from Objetos import Vertice
 from igraph import Graph, plot
 import os
 
-def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int) -> tuple[Graph, str]:
+def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int, curso: str) -> tuple[Graph, str]:
     """
     Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia recebida
     Args:
@@ -56,7 +56,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
     if dirigido:    layout = grafo.layout("tree")
     else:           layout = grafo.layout("fr")
 
-    caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{id}")
+    caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{curso}_{id}")
     os.makedirs(caminhoDiretorio, exist_ok = True)
 
     nomeImagem = "Grafo_Pre_Requisitos.png" if dirigido else "Grafo_Conflitos_Horarios.png"
