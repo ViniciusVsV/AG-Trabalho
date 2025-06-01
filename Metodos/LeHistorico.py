@@ -1,9 +1,9 @@
+import pymupdf
 def LeHistorico(historico):
-    """
-    Recebe o arquivo pdf que representa o histórico do aluno.
-    Obtém, a partir desse arquivo, o curso do discente e todas as matérias já cursadas.
+    doc = pymupdf.open(historico) # open a document
     
-    Retorna:
-        Curso do usuário.
-        Array com todas as matérias já cumpridas.
-    """
+
+
+if __name__ == '__main__':
+    nameArq = input("Digite o nome do pdf:")
+    LeHistorico(nameArq)
