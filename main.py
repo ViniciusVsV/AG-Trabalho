@@ -50,14 +50,15 @@ if __name__ == "__main__":
                     sigla       =   row['SIGLA'],
                     nome        =   row['NOME'],
                     curso       =   row['CURSO'],
-                    categoria   =   row['CAT.'],
-                    semestre    =   row['PER.'],
-                    anualidade  =   row['AN.'],
-                    horarios    =   row['HOR.'],
+                    categoria   =   row['CAT'],
+                    semestre    =   row['PER'],
+                    anualidade  =   row['AN'],
+                    horarios    =   row['HOR'],
                     cargaHor    =   row['CH'],
-                    preReq      =   row['REQ.'],
+                    preReq      =   row['REQ'],
+                    equivalentes=   row['EQ'],
 
-                    peso        =   nPeriodos - row['PER.'] + 1
+                    peso        =   nPeriodos - row['PER'] + 1
                 )
                 disciplinas.append(disciplina) 
 

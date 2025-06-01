@@ -13,7 +13,13 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
     """
 
     disciplinasFiltradas = disciplinas.copy()
-    
+
+    # Adiciona às disciplinas cumpridas todas as equivalentes que também devem ser ditas como cumpridas
+    for disciplina in disciplinas:
+        if disciplina.sigla in disciplinasCumpridas:
+            for equivalente in disciplina.equivalentes.__getEquivalencias():
+                disciplinasCumpridas.add(equivalente)
+
     for disciplina in disciplinas:
         # Filtra da lista as matérias que não estão sendo ofertadas
         if disciplina.semestre % 2 != periodoAtual % 2:

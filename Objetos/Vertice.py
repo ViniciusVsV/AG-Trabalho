@@ -1,8 +1,9 @@
 from .Horario import Horario
 from .PreRequisito import PreRequisito
+from .Equivalente import Equivalente
 
 class Vertice:
-    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str, peso: float):
+    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str, equivalentes: str, peso: float):
         self.sigla = sigla
         self.nome = nome
         self.curso = curso
@@ -12,6 +13,8 @@ class Vertice:
         self.horarios = Horario(horarios)
         self.cargaHor = cargaHor
         self.preReq = PreRequisito(preReq)
+        self.equivalentes = Equivalente(equivalentes)
+        
         self.peso = 0.0 if categoria == "OPTATIVA" else peso
 
     def verificaHorarioConflitante(self, outro: 'Vertice') -> bool:
