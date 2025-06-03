@@ -5,10 +5,10 @@ from Objetos.Vertice import Vertice
 @pytest.mark.parametrize("disciplinas, expected", [
     (
         [
-            Vertice("MAT101", "CCO", "Matemática I", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", 0),
-            Vertice("FIS101", "CCO", "Física I", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", 0),
-            Vertice("MAT102", "CCO", "Química I", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", 0),
-            Vertice("FIS102", "CCO", "Química I", "Obrigatória", 3, "NÃO", "4M1 5T2", 60, "FIS101 E MAT102", 0)
+            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
+            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", "-", 0),
+            Vertice("MAT102", "Química I", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", "-", 0),
+            Vertice("FIS102", "Química I", "CCO", "Obrigatória", 3, "NÃO", "4M1 5T2", 60, "FIS101 E MAT102", "-", 0)
         ],
         [
             [],
@@ -19,9 +19,9 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "CCO", "Matemática I", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", 0),
-            Vertice("FIS101", "CCO", "Física I", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", 0),
-            Vertice("MAT102", "CCO", "Matemática II", "Obrigatória", 2, "NÃO", "2M1 3T3", 60, "MAT101", 0)
+            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
+            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", "-", 0),
+            Vertice("MAT102", "Matemática II", "CCO", "Obrigatória", 2, "NÃO", "2M1 3T3", 60, "MAT101", "-", 0)
         ],
         [
             [],
@@ -31,8 +31,8 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "CCO", "Matemática I", "Obrigatória", 1, "NÃO", "2M1 3T3", 60, "-", 0),
-            Vertice("MAT102", "CCO", "Matemática II", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", 0)
+            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M1 3T3", 60, "-", "-", 0),
+            Vertice("MAT102", "Matemática II", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", "-", 0)
         ],
         [
             [],

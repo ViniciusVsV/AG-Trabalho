@@ -41,3 +41,18 @@ class Vertice:
 
         return self.preReq.contem(outro.sigla)
 
+    # Só para garantir que a verificação de igualdade funcione corretamente
+    # Estava dando problema por causa que comparada as referências de objetos
+    # ao invés de seus valores
+    def __eq__(self, value):
+        if not isinstance(value, Vertice):
+            return False
+
+        if self.sigla != value.sigla:
+            return False
+
+        if self.peso != value.peso:
+            return False
+
+    def __str__(self):
+        return f"Vertice(sigla={self.sigla}, nome={self.nome}, curso={self.curso}, categoria={self.categoria}, semestre={self.semestre}, anualidade={self.anualidade}, horarios={self.horarios}, cargaHor={self.cargaHor}, preReq={self.preReq}, equivalentes={self.equivalentes}, peso={self.peso})"

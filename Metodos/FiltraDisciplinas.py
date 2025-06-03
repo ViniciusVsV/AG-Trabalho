@@ -17,7 +17,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
     # Adiciona às disciplinas cumpridas todas as equivalentes que também devem ser ditas como cumpridas
     for disciplina in disciplinas:
         if disciplina.sigla in disciplinasCumpridas:
-            for equivalente in disciplina.equivalentes.__getEquivalencias():
+            for equivalente in disciplina.equivalentes.equivalentes:
                 disciplinasCumpridas.add(equivalente)
 
     for disciplina in disciplinas:

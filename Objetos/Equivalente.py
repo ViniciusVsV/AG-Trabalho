@@ -2,30 +2,39 @@ class Equivalente:
     def __init__(self, equivalentes: str):
         self.__equivalentes = equivalentes
 
-        self.__list = self.__parseEquivalente()
+        self.__set = self.__parseEquivalente()
 
-    def __parseEquivalente(self) -> list[str]:
+    def __parseEquivalente(self) -> set[str]:
         """
         Converte a string de equivalências em uma lista siglas.
 
         Returns:
-            list[str]: Conjunto de siglas individuais.
+            set[str]: Conjunto de siglas individuais.
         """
 
         if self.__equivalentes == "-" or not self.__equivalentes:
-            return []
+            return {}
         
-        equivalencias = [eq.strip() for eq in self.__equivalentes.split(",")]
+        equivalencias = set([eq.strip() for eq in self.__equivalentes.split(",")])
 
         return equivalencias
-    
-    def getEquivalencias(self) -> list[str]:
+
+    @property
+    def equivalentes(self) -> set[str]:
         """
-        Getter da lista de equivalências.
+        Lista de equivalências.
 
         Returns:
-            list[str]: Conjunto de siglas das disciplinas equivalentes.
+            set[str]: Conjunto de siglas das disciplinas equivalentes.
         """
-        return self.__list
-        
+        return self.__set
+    
+    def __str__(self):
+        """
+        Representação em string do objeto Equivalente.
+
+        Returns:
+            str: String formatada com as equivalências.
+        """
+        return self.__equivalentes
 
