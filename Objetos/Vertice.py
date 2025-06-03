@@ -1,20 +1,22 @@
 from .Horario import Horario
 from .PreRequisito import PreRequisito
+from .Equivalente import Equivalente
 
 class Vertice:
-    def __init__(self, sigla: str, nome: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str):
+    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, semestre: int, anualidade: str, horarios: str, cargaHor: int, preReq: str, equivalentes: str, peso: float):
         self.sigla = sigla
         self.nome = nome
+        self.curso = curso
         self.categoria = categoria
         self.semestre = semestre
         self.anualidade = anualidade == 'SIM'
         self.horarios = Horario(horarios)
         self.cargaHor = cargaHor
         self.preReq = PreRequisito(preReq)
+        self.equivalentes = Equivalente(equivalentes)
         
-        self.Peso: int = None
+        self.peso = 0.0 if categoria == "OPTATIVA" else peso
 
-    
     def verificaHorarioConflitante(self, outro: 'Vertice') -> bool:
         """
         Verifica se há conflito de horários entre dois vértices.
@@ -26,3 +28,31 @@ class Vertice:
         """
         
         return self.horarios.isConflitante(outro.horarios)
+
+    def isPreRequisito(self, outro: 'Vertice') -> bool:
+        """
+        Verifica se o vértice atual é pré-requisito do outro vértice.
+
+        Args:
+            outro (Vertice): Outro vértice para verificar os pré-requisitos.
+        Returns:
+            bool: True se o pré-requisito for atendido, False caso contrário.
+        """
+
+        return self.preReq.contem(outro.sigla)
+
+    # Só para garantir que a verificação de igualdade funcione corretamente
+    # Estava dando problema por causa que comparada as referências de objetos
+    # ao invés de seus valores
+    def __eq__(self, value):
+        if not isinstance(value, Vertice):
+            return False
+
+        if self.sigla != value.sigla:
+            return False
+
+        if self.peso != value.peso:
+            return False
+
+    def __str__(self):
+        return f"Vertice(sigla={self.sigla}, nome={self.nome}, curso={self.curso}, categoria={self.categoria}, semestre={self.semestre}, anualidade={self.anualidade}, horarios={self.horarios}, cargaHor={self.cargaHor}, preReq={self.preReq}, equivalentes={self.equivalentes}, peso={self.peso})"
