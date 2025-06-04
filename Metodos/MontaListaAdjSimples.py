@@ -12,6 +12,8 @@ def MontaListaAdjSimples(turmasFiltradas: list[Turma]) -> list[list[int]]:
 
     # Inicializa a lista de adjacência
     n = len(turmasFiltradas)
+    print(n)
+
     listaAdj = [[] for _ in range(n)]
 
     # Preenche a lista de adjacência com os conflitos de horários

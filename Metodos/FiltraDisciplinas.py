@@ -16,7 +16,7 @@ def FiltraDisciplinas(disciplinas: list[Disciplina], disciplinasCumpridas: set[s
 
     # Adiciona às disciplinas cumpridas todas as equivalentes que também devem ser ditas como cumpridas
     for disciplina in disciplinas:
-        if disciplina.codigo in disciplinasCumpridas:
+        if disciplina.sigla in disciplinasCumpridas:
             for equivalente in disciplina.equivalentes.equivalentes:
                 disciplinasCumpridas.add(equivalente)
 
@@ -26,7 +26,7 @@ def FiltraDisciplinas(disciplinas: list[Disciplina], disciplinasCumpridas: set[s
             disciplinasFiltradas.remove(disciplina)
 
         # Fitlra da lista as matérias que já foram concluidas
-        elif disciplina.codigo in disciplinasCumpridas:
+        elif disciplina.sigla in disciplinasCumpridas:
             disciplinasFiltradas.remove(disciplina)
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos
