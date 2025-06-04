@@ -6,7 +6,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -19,7 +19,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="FIS101",
+                sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -32,7 +32,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="MAT102",
+                sigla="MAT102",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -45,7 +45,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="FIS102",
+                sigla="FIS102",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -68,7 +68,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -81,7 +81,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="FIS101",
+                sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -94,7 +94,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="MAT102",
+                sigla="MAT102",
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -116,7 +116,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -129,7 +129,7 @@ from Objetos import Disciplina
                 peso=0.0
             ),
             Disciplina(
-                codigo="MAT102",
+                sigla="MAT102",
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",

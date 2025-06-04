@@ -7,7 +7,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -16,7 +16,7 @@ from Objetos import Disciplina
                 carga_horaria=60
             ),
             Disciplina(
-                codigo="FIS101",
+                sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -25,7 +25,7 @@ from Objetos import Disciplina
                 carga_horaria=60
             ),
             Disciplina(
-                codigo="QUI101",
+                sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -43,7 +43,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -53,7 +53,7 @@ from Objetos import Disciplina
                 pre_requisitos="-"
             ),
             Disciplina(
-                codigo="FIS101",
+                sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -63,7 +63,7 @@ from Objetos import Disciplina
                 pre_requisitos="-"
             ),
             Disciplina(
-                codigo="QUI101",
+                sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -73,7 +73,7 @@ from Objetos import Disciplina
                 pre_requisitos="-"
             ),
             Disciplina(
-                codigo="MAT102",
+                sigla="MAT102",
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -92,7 +92,7 @@ from Objetos import Disciplina
     (
         [
             Disciplina(
-                codigo="MAT101",
+                sigla="MAT101",
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -101,7 +101,7 @@ from Objetos import Disciplina
                 carga_horaria=60
             ),
             Disciplina(
-                codigo="FIS101",
+                sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -110,7 +110,7 @@ from Objetos import Disciplina
                 carga_horaria=60
             ),
             Disciplina(
-                codigo="QUI101",
+                sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
@@ -126,7 +126,7 @@ from Objetos import Disciplina
 ])
 def test_FiltraDisciplinas(disciplinas, disciplinasCumpridas, periodoAtual, expected):
     disciplinasFiltradas = FiltraDisciplinas(disciplinas, disciplinasCumpridas, periodoAtual)
-    disciplinasFiltradas_codigos = {disc.codigo for disc in disciplinasFiltradas}
-    assert expected.issubset(disciplinasFiltradas_codigos), f"Esperado {expected}, mas obteve {disciplinasFiltradas_codigos} para {[x.codigo for x in disciplinas]}"
+    disciplinasFiltradas_siglas = {disc.sigla for disc in disciplinasFiltradas}
+    assert expected.issubset(disciplinasFiltradas_siglas), f"Esperado {expected}, mas obteve {disciplinasFiltradas_siglas} para {[x.sigla for x in disciplinas]}"
 
     # assert any(dis == expected), f"Esperado {expected}, mas obteve {disciplinasFiltradas} para {disciplinas}"

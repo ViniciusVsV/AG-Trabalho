@@ -11,11 +11,11 @@ from Objetos import Disciplina
             [1, 2]
         ],
         [
-            Disciplina(codigo="PROJ101", nome="Projeto Integrado", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="SIM", carga_horaria=60, pre_requisitos="-", peso=8),
-            Disciplina(codigo="MAT101", nome="Matemática I", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="NÃO", carga_horaria=60, pre_requisitos="-", peso=8),
-            Disciplina(codigo="FIS101", nome="Física I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
-            Disciplina(codigo="MAT102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
-            Disciplina(codigo="FIS102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=3, anualidade="NÃO", carga_horaria=60, pre_requisitos="FIS101 E MAT102", peso=6)
+            Disciplina(sigla="PROJ101", nome="Projeto Integrado", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="SIM", carga_horaria=60, pre_requisitos="-", peso=8),
+            Disciplina(sigla="MAT101", nome="Matemática I", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="NÃO", carga_horaria=60, pre_requisitos="-", peso=8),
+            Disciplina(sigla="FIS101", nome="Física I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
+            Disciplina(sigla="MAT102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
+            Disciplina(sigla="FIS102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=3, anualidade="NÃO", carga_horaria=60, pre_requisitos="FIS101 E MAT102", peso=6)
         ],
         [
 
