@@ -25,9 +25,6 @@ if __name__ == "__main__":
             disciplinasCumpridas = set()
             (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
 
-            print(curso)
-            print(disciplinasCumpridas)
-
             preferenciasOptativas = []
             
             nPeriodos = 8
@@ -110,5 +107,5 @@ if __name__ == "__main__":
             # Atualmente só printa as disciplinas e seus pesos. Temporário
             pesosOrdenados = sorted(disciplinasFiltradas, key=lambda d: d.peso, reverse=True)
 
-            #for p in pesosOrdenados:
-            #    print(p.codigo, "-", p.nome, "--", p.categoria, "---", p.curso, "----", p.peso, "--- Turmas:", len(p.turmas))
+            for p in pesosOrdenados:
+                print(p.sigla, "-", p.nome, "--", p.categoria, "---", p.curso, "----", p.peso, "--- Turmas:", len(p.turmas))
