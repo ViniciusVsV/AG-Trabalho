@@ -22,8 +22,10 @@ if __name__ == "__main__":
             # Atualmente usando input. Temporário
             caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
             
-            disciplinasCumpridas = set()
-            (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            disciplinasCumpridas = set(["XDES01", "CRSC03", "XMAC01", "CAHCO4", "MAT00A"])
+            curso = 'CCO'
+            
+            #(curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
 
             preferenciasOptativas = []
             
@@ -65,7 +67,7 @@ if __name__ == "__main__":
                     anualidade      =   row['AN'],
                     carga_horaria   =   row['CH'],
                     pre_requisitos  =   row['REQ'],
-                    # equivalentes  =   row['EQ'],
+                    equivalentes    =   row['EQV'],
                     # correquisito  =   row['COR'],
 
                     peso            =   nPeriodos - row['PER'] + 1

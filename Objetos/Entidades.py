@@ -43,6 +43,18 @@ class Disciplina:
         """
         self.turmas.append((nro_turma, horario))
 
+    def criaTurmas(self) -> list['Turma']:
+        """
+        Cria uma lista de objetos Turma a partir dos horários da disciplina.
+
+        Returns:
+            list[Turma]: Lista de objetos Turma criados.
+        """
+        turmas = []
+        for (nro_turma, horario) in self.turmas:
+            turmas.append(Turma(self, nro_turma=nro_turma, horarios=horario, peso=self.peso))
+        return turmas
+
     def isPreRequisito(self, outro: 'Disciplina') -> bool:
         """
         Verifica se a outra disciplina é pré-requisito da disciplina atual.
@@ -66,17 +78,16 @@ class Disciplina:
         """
         return self.pre_requisitos.verifica(disciplinasCumpridas)
     
-    def criaTurmas(self) -> list['Turma']:
+    def atendeEquivalencia(self, disciplinasEquivalentes: set[str]) -> bool:
         """
-        Cria uma lista de objetos Turma a partir dos horários da disciplina.
+        Verifica se alguma equivalência da disciplina foi atendida.
 
+        Args:
+            disciplinasEquivalentes (set[str]): Conjunto de disciplinas equivalentes.
         Returns:
-            list[Turma]: Lista de objetos Turma criados.
+            bool: True se alguma equivalência foi atendida, False caso contrário.
         """
-        turmas = []
-        for (nro_turma, horario) in self.turmas:
-            turmas.append(Turma(self, nro_turma=nro_turma, horarios=horario, peso=self.peso))
-        return turmas
+        return self.equivalentes.verifica(disciplinasEquivalentes)
 
     def __eq__(self, value):
         if not isinstance(value, Disciplina):

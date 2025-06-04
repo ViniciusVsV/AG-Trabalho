@@ -12,25 +12,31 @@ def FiltraDisciplinas(disciplinas: list[Disciplina], disciplinasCumpridas: set[s
         Lista de vértices representando as matérias pertinentes ao caso de uso.
     """
 
-    disciplinasFiltradas = disciplinas.copy()
-
-    # Adiciona às disciplinas cumpridas todas as equivalentes que também devem ser ditas como cumpridas
-    for disciplina in disciplinas:
-        if disciplina.sigla in disciplinasCumpridas:
-            for equivalente in disciplina.equivalentes.equivalentes:
-                disciplinasCumpridas.add(equivalente)
+    disciplinasFiltradas = []
 
     for disciplina in disciplinas:
         # Filtra da lista as matérias que não estão sendo ofertadas
         if disciplina.semestre % 2 != periodoAtual % 2:
-            disciplinasFiltradas.remove(disciplina)
+            continue
 
-        # Fitlra da lista as matérias que já foram concluidas
-        elif disciplina.sigla in disciplinasCumpridas:
-            disciplinasFiltradas.remove(disciplina)
+        # Filtra da lista as matérias que já foram concluidas
+        if disciplina.sigla in disciplinasCumpridas:
+            disciplinasCumpridas.update(disciplina.equivalentes.eq_set)
+
+            continue
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos
-        elif not disciplina.atendePreRequisitos(disciplinasCumpridas):
-            disciplinasFiltradas.remove(disciplina)
+        if not disciplina.atendePreRequisitos(disciplinasCumpridas) or disciplina.atendeEquivalencia(disciplinasCumpridas):
+            disciplinasCumpridas.add(disciplina.sigla)
+            disciplinasCumpridas.update(disciplina.equivalentes.eq_set)
+            
+            continue
+
+        # Filtra da lista as matérias que possuem co-requisitos que não estão sendo recomendados ou não foram cumpridos
+        if disciplina.correquisitos:
+            if not disciplina.correquisitos.issubset(disciplinasFiltradas.union(disciplinasCumpridas)):
+                continue           
+
+        disciplinasFiltradas.append(disciplina)
 
     return disciplinasFiltradas
