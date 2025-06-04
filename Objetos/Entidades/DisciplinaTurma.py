@@ -1,7 +1,6 @@
 from ..PreRequisito import PreRequisito
 from ..Equivalente import Equivalente
-
-from .Turma import Turma
+from ..Horario import Horario
 
 class Disciplina:
     """
@@ -76,7 +75,7 @@ class Disciplina:
         """
         turmas = []
         for (nro_turma, horario) in self.turmas:
-            turmas.append(Turma(nro_turma=nro_turma, horarios=horario, peso=self.peso))
+            turmas.append(Turma(self, nro_turma=nro_turma, horarios=horario, peso=self.peso))
         return turmas
 
     def __eq__(self, value):
@@ -92,3 +91,48 @@ class Disciplina:
     def __str__(self):
         return f"Disciplina(sigla={self.sigla}, nome={self.nome})"
 
+class Turma:
+    def __init__(self, disciplina: 'Disciplina', nro_turma: int, horarios: str, peso: float = 0.0):
+        self.disciplina = disciplina
+        self.nro_turma = nro_turma
+        self.horarios = Horario(horarios)
+
+        self.peso = peso
+
+    def verificaHorarioConflitante(self, outro: 'Turma') -> bool:
+        """
+        Verifica se há conflito de horários entre duas turmas.
+
+        Args:
+            outro (Turma): Outra turma para comparar os horários.
+        Returns:
+            bool: True se houver conflito de horários, False caso contrário.
+        """
+        
+        return self.horarios.isConflitante(outro.horarios)
+    
+    @property
+    def codigo(self) -> str:
+        """
+        Retorna o código da disciplina associada à turma.
+
+        Returns:
+            str: Código da disciplina.
+        """
+        return self.disciplina.codigo
+
+    # Só para garantir que a verificação de igualdade funcione corretamente
+    # Estava dando problema por causa que comparada as referências de objetos
+    # ao invés de seus valores
+    def __eq__(self, value):
+        if not isinstance(value, Turma):
+            return False
+
+        if self.codigo != value.codigo:
+            return False
+
+        if self.peso != value.peso:
+            return False
+
+    def __str__(self):
+        return f"Turma(disciplina={self.disciplina.codigo}, nro_turma={self.nro_turma}, horarios={self.horarios})"
