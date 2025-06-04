@@ -1,1 +1,0 @@
-from .DisciplinaTurma import Disciplina, Turma

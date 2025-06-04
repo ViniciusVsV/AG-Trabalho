@@ -1,6 +1,6 @@
-from ..PreRequisito import PreRequisito
-from ..Equivalente import Equivalente
-from ..Horario import Horario
+from .PreRequisito import PreRequisito
+from .Equivalente import Equivalente
+from .Horario import Horario
 
 class Disciplina:
     """
