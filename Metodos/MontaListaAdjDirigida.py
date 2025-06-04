@@ -1,10 +1,10 @@
-from Objetos import Vertice
+from Objetos import Disciplina
 
-def MontaListaAdjDirigida(disciplinas: list[Vertice]) -> list[list[int]]:
+def MontaListaAdjDirigida(disciplinas: list[Disciplina]) -> list[list[int]]:
     """
     Gera uma lista de adjacência dirigida a partir da lista de disciplinas recebida.
     Args:
-        disciplinas (list[Vertice]): Lista de vértices, onde cada vértice representa uma disciplina do curso.
+        disciplinas (list[Disciplina]): Lista de vértices, onde cada vértice representa uma disciplina do curso.
     
     Returns:
         list[list[int]]: Lista de adjacência representando as relações de dependência (pré-requisito) entre as disciplinas.

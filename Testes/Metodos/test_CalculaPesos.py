@@ -1,6 +1,6 @@
 import pytest
 from Metodos.CalculaPesos import CalculaPesos
-from Objetos.Vertice import Vertice
+from Objetos import Disciplina
 
 @pytest.mark.parametrize("listaAdj, disciplinas, expected", [
     (
@@ -11,11 +11,11 @@ from Objetos.Vertice import Vertice
             [1, 2]
         ],
         [
-            Vertice("PROJ101", "Projeto Integrado", "CCO", "Obrigatória", 1, "SIM", "2M12 3T3", 60, "-", "-", 8),
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 8),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", "-", 7),
-            Vertice("MAT102", "Química I", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", "-", 7),
-            Vertice("FIS102", "Química I", "CCO", "Obrigatória", 3, "NÃO", "4M1 5T2", 60, "FIS101 E MAT102", "-", 6)
+            Disciplina(codigo="PROJ101", nome="Projeto Integrado", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="SIM", carga_horaria=60, pre_requisitos="-", peso=8),
+            Disciplina(codigo="MAT101", nome="Matemática I", curso="CCO", categoria="Obrigatória", semestre=1, anualidade="NÃO", carga_horaria=60, pre_requisitos="-", peso=8),
+            Disciplina(codigo="FIS101", nome="Física I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
+            Disciplina(codigo="MAT102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=2, anualidade="NÃO", carga_horaria=60, pre_requisitos="MAT101", peso=7),
+            Disciplina(codigo="FIS102", nome="Química I", curso="CCO", categoria="Obrigatória", semestre=3, anualidade="NÃO", carga_horaria=60, pre_requisitos="FIS101 E MAT102", peso=6)
         ],
         [
 

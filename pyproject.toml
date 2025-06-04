@@ -7,6 +7,7 @@ requires-python = ">=3.13"
 dependencies = [
     "igraph>=0.11.8",
     "pandas>=2.2.3",
+    "pycairo>=1.28.0",
     "pymupdf>=1.26.0",
 ]
 

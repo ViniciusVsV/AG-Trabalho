@@ -1,13 +1,40 @@
 import pytest
 from Metodos.MontaListaAdjSimples import MontaListaAdjSimples
-from Objetos.Vertice import Vertice
+from Objetos import Disciplina, Turma
 
 @pytest.mark.parametrize("disciplinasFiltradas, expected", [
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 1, "NÃO", "2M23 3T2", 60, "-", "-", 0),
-            Vertice("QUI101", "Química I", "CCO", "Obrigatória", 1, "NÃO", "4M1 5T2", 60, "-", "-", 0)
+            Turma(
+                disciplina=Disciplina(
+                    codigo="MAT101", nome="Matemática I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M12 3T3",
+                peso=0.0
+            ),
+            Turma(
+                disciplina=Disciplina(
+                    codigo="FIS101", nome="Física I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M23 3T2",
+                peso=0.0
+            ),
+            Turma(
+                disciplina=Disciplina(
+                    codigo="QUI101", nome="Química I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="4M1 5T2",
+                peso=0.0
+            )
         ],
         [
             [1],
@@ -17,9 +44,36 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 1, "NÃO", "2M23 3T2", 60, "-", "-", 0),
-            Vertice("BIO101", "Biologia I", "CCO", "Obrigatória", 1, "NÃO", "2M1 3T3", 60, "-", "-", 0)
+            Turma(
+                disciplina=Disciplina(
+                    codigo="MAT101", nome="Matemática I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M12 3T3",
+                peso=0.0
+            ),
+            Turma(
+                disciplina=Disciplina(
+                    codigo="FIS101", nome="Física I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M23 3T2",
+                peso=0.0
+            ),
+            Turma(
+                disciplina=Disciplina(
+                    codigo="BIO101", nome="Biologia I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M1 3T3",
+                peso=0.0
+            )
         ],
         [
             [1, 2],
@@ -29,8 +83,26 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M1 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 1, "NÃO", "4M1 5T2", 60, "-", "-", 0)
+            Turma(
+                disciplina=Disciplina(
+                    codigo="MAT101", nome="Matemática I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="2M1 3T3",
+                peso=0.0
+            ),
+            Turma(
+                disciplina=Disciplina(
+                    codigo="FIS101", nome="Física I", curso="CCO",
+                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
+                    carga_horaria=60
+                ),
+                nro_turma=1,
+                horarios="4M1 5T2",
+                peso=0.0
+            )
         ],
         [
             [],

@@ -1,14 +1,38 @@
 import pytest
 from Metodos.FiltraDisciplinas import FiltraDisciplinas
-from Objetos.Vertice import Vertice
+from Objetos import Disciplina
 
 @pytest.mark.parametrize("disciplinas, disciplinasCumpridas, periodoAtual, expected", [
     # Teste do filtro de disciplinas que não estão sendo ofertadas
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "-", "-", 0),
-            Vertice("QUI101", "Química I", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "-", "-", 0)
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60
+            ),
+            Disciplina(
+                codigo="FIS101",
+                nome="Física I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60
+            ),
+            Disciplina(
+                codigo="QUI101",
+                nome="Química I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60
+            )
         ],
         set(),
         1,
@@ -18,10 +42,46 @@ from Objetos.Vertice import Vertice
     # Teste do filtro de disciplinas cujos pré-requisitos não foram atendidos
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 1, "NÃO", "2M23 3T2", 60, "-", "-", 0),
-            Vertice("QUI101", "Química I", "CCO", "Obrigatória", 1, "NÃO", "4M1 5T2", 60, "-", "-", 0),
-            Vertice("MAT102", "Matemática II", "CCO", "Obrigatória", 3, "NÃO", "2M12 3T3", 60, "MAT101", "-", 0),
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-"
+            ),
+            Disciplina(
+                codigo="FIS101",
+                nome="Física I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-"
+            ),
+            Disciplina(
+                codigo="QUI101",
+                nome="Química I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-"
+            ),
+            Disciplina(
+                codigo="MAT102",
+                nome="Matemática II",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=3,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101"
+            )
         ],
         set(),
         1,
@@ -31,18 +91,42 @@ from Objetos.Vertice import Vertice
     # Teste do filtro de disciplinas já cumpridas
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 1, "NÃO", "2M23 3T2", 60, "-", "-", 0),
-            Vertice("QUI101", "Química I", "CCO", "Obrigatória", 1, "NÃO", "4M1 5T2", 60, "-", "-", 0)
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60
+            ),
+            Disciplina(
+                codigo="FIS101",
+                nome="Física I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60
+            ),
+            Disciplina(
+                codigo="QUI101",
+                nome="Química I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60
+            )
         ],
-        set(["MAT101", "FIS101"]),
+        {"MAT101", "FIS101"},
         1,
         {"QUI101"}
     )
 ])
 def test_FiltraDisciplinas(disciplinas, disciplinasCumpridas, periodoAtual, expected):
     disciplinasFiltradas = FiltraDisciplinas(disciplinas, disciplinasCumpridas, periodoAtual)
-    disciplinasFiltradas_siglas = {disc.sigla for disc in disciplinasFiltradas}
-    assert expected.issubset(disciplinasFiltradas_siglas), f"Esperado {expected}, mas obteve {disciplinasFiltradas_siglas} para {[x.sigla for x in disciplinas]}"
+    disciplinasFiltradas_codigos = {disc.codigo for disc in disciplinasFiltradas}
+    assert expected.issubset(disciplinasFiltradas_codigos), f"Esperado {expected}, mas obteve {disciplinasFiltradas_codigos} para {[x.codigo for x in disciplinas]}"
 
     # assert any(dis == expected), f"Esperado {expected}, mas obteve {disciplinasFiltradas} para {disciplinas}"

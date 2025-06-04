@@ -1,14 +1,62 @@
 import pytest
 from Metodos.MontaListaAdjDirigida import MontaListaAdjDirigida
-from Objetos.Vertice import Vertice
+from Objetos import Disciplina
 
 @pytest.mark.parametrize("disciplinas, expected", [
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", "-", 0),
-            Vertice("MAT102", "Química I", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", "-", 0),
-            Vertice("FIS102", "Química I", "CCO", "Obrigatória", 3, "NÃO", "4M1 5T2", 60, "FIS101 E MAT102", "-", 0)
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="FIS101",
+                nome="Física I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="MAT102",
+                nome="Química I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="FIS102",
+                nome="Química I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=3,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="FIS101 E MAT102",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
         ],
         [
             [],
@@ -19,9 +67,45 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M12 3T3", 60, "-", "-", 0),
-            Vertice("FIS101", "Física I", "CCO", "Obrigatória", 2, "NÃO", "2M23 3T2", 60, "MAT101", "-", 0),
-            Vertice("MAT102", "Matemática II", "CCO", "Obrigatória", 2, "NÃO", "2M1 3T3", 60, "MAT101", "-", 0)
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="FIS101",
+                nome="Física I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="MAT102",
+                nome="Matemática II",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
         ],
         [
             [],
@@ -31,8 +115,32 @@ from Objetos.Vertice import Vertice
     ),
     (
         [
-            Vertice("MAT101", "Matemática I", "CCO", "Obrigatória", 1, "NÃO", "2M1 3T3", 60, "-", "-", 0),
-            Vertice("MAT102", "Matemática II", "CCO", "Obrigatória", 2, "NÃO", "4M1 5T2", 60, "MAT101", "-", 0)
+            Disciplina(
+                codigo="MAT101",
+                nome="Matemática I",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=1,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="-",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
+            Disciplina(
+                codigo="MAT102",
+                nome="Matemática II",
+                curso="CCO",
+                categoria="Obrigatória",
+                semestre=2,
+                anualidade="NÃO",
+                carga_horaria=60,
+                pre_requisitos="MAT101",
+                equivalentes="-",
+                correquisito="-",
+                peso=0.0
+            ),
         ],
         [
             [],

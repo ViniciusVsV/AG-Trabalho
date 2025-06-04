@@ -1,14 +1,14 @@
-from Objetos import Vertice
+from Objetos import Disciplina
 
 from igraph import Graph, plot
 import os
 
-def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: bool, id: int, curso: str) -> tuple[Graph, str]:
+def GeraGrafoDisciplina(listaAdj: list[list[int]], disciplinas: list[Disciplina], dirigido: bool, id: int, curso: str) -> tuple[Graph, str]:
     """
-    Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia recebida
+    Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia de disciplinas recebida
     Args:
         listaAdj (list[list[int]]): Lista de adjacência do grafo a ser construído.
-        disciplinas (list[Vertice]): Lista das disciplinas que serão incluidas no grafo.
+        disciplinas (list[Disciplina]): Lista das disciplinas que serão incluidas no grafo.
         dirigido (bool):  Booleana que dita se o grafo é dirigido ou não.
 
     Retorna:
@@ -19,13 +19,13 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
 
     # Adiciona os vértices
     siglasPrefixos = []
-    siglasNormais = []
+    codigosNormais = []
     cores = []
     i = 0
     
     for disciplina in disciplinas:
-        siglasPrefixos.append(str(i) + "_" + disciplina.sigla)
-        siglasNormais.append(disciplina.sigla)
+        siglasPrefixos.append(str(i) + "_" + disciplina.codigo)
+        codigosNormais.append(disciplina.codigo)
 
         cores.append(
             "lightblue" if disciplina.categoria == "OBRIGATORIA" else
@@ -37,7 +37,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
 
     grafo.add_vertices(siglasPrefixos)  
 
-    grafo.vs["label"] = siglasNormais
+    grafo.vs["label"] = codigosNormais
     grafo.vs["color"] = cores
 
     # Adiciona as arestas
@@ -66,7 +66,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Vertice], dirigido: b
     plot(
         grafo,
         layout = layout,
-        vertex_label = siglasNormais,
+        vertex_label = codigosNormais,
         vertex_color = grafo.vs["color"],
         vertex_size = 60,
         edge_color = "gray",

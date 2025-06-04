@@ -1,10 +1,10 @@
-from Objetos import Vertice
+from Objetos import Disciplina
 
-def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str], periodoAtual: int) -> list[Vertice]:
+def FiltraDisciplinas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], periodoAtual: int) -> list[Disciplina]:
     """
     Filtra a lista de todas as disciplinas recebida, removendo todas as matérias obsoletas para o caso de uso.
     Args:
-        disciplinas (list[Vertice]): Lista de todas as disciplinas do curso.
+        disciplinas (list[Disciplina]): Lista de todas as disciplinas do curso.
         disciplinasCumpridas (set[str]): Set com as disciplinas já cursadas pelo discente.
         periodoAtual (int): Período do ano para o qual a previsão será feita (1 ou 2).
     
@@ -16,7 +16,7 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
 
     # Adiciona às disciplinas cumpridas todas as equivalentes que também devem ser ditas como cumpridas
     for disciplina in disciplinas:
-        if disciplina.sigla in disciplinasCumpridas:
+        if disciplina.codigo in disciplinasCumpridas:
             for equivalente in disciplina.equivalentes.equivalentes:
                 disciplinasCumpridas.add(equivalente)
 
@@ -26,11 +26,11 @@ def FiltraDisciplinas(disciplinas: list[Vertice], disciplinasCumpridas: set[str]
             disciplinasFiltradas.remove(disciplina)
 
         # Fitlra da lista as matérias que já foram concluidas
-        elif disciplina.sigla in disciplinasCumpridas:
+        elif disciplina.codigo in disciplinasCumpridas:
             disciplinasFiltradas.remove(disciplina)
 
         # Filtra da lista as matérias cujos pré requisitos não foram atendidos
-        elif not disciplina.preReq.verifica(disciplinasCumpridas):
+        elif not disciplina.atendePreRequisitos(disciplinasCumpridas):
             disciplinasFiltradas.remove(disciplina)
 
     return disciplinasFiltradas

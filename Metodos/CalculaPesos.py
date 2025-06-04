@@ -1,12 +1,12 @@
-from Objetos import Vertice
+from Objetos import Disciplina
 
-def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Vertice]) -> list[Vertice]:
+def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> list[Disciplina]:
     """
     Calcula os pesos dos vértices do grafo dirigido recebido com uma BFS.
     Os pesos serão calculados percorrendo o grafo de trás para frente (matéria mais ao fim do curso para a mais ao inícnio), somando ao vértice atual os pesos de todos os vértices predecessores.
     Args:
         listaAdj (list[list[int]]): Lista de adjacência do grafo a ser analisado
-        disciplinas (list[Vertice]): Lista das disciplinas inclusas no grafo.
+        disciplinas (list[Disciplina]): Lista das disciplinas inclusas no grafo.
 
     Retorna:
         Lista de disciplinas (vértices) com pesos calculados.
@@ -28,7 +28,7 @@ def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Vertice]) -> list[
 
     return disciplinas
 
-def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Vertice], pesoPropagado: float):
+def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Disciplina], pesoPropagado: float):
     # Obtém os multiplicadores de pesos
     [multiplicadorAnualidade, multiplicadorCategoria] = ObtemMultiplicadores(disciplinas[indiceV])
 
@@ -39,11 +39,11 @@ def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Vertice], pes
     for adjacente in listaAdj[indiceV]:
         DFS(adjacente, listaAdj, disciplinas, disciplinas[indiceV].peso)
 
-def ObtemMultiplicadores(disciplina: Vertice) -> tuple[float, float]:
+def ObtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
     """
     Obtém os valores para os multiplicadores do peso de acordo com a anualidade e categoria da disciplina.
     Args:
-        disciplina (Vertice): Disciplina sendo analisada.
+        disciplina (Disciplina): Disciplina sendo analisada.
 
     Retorna:
         Tupla com os multiplicadores de anualidade e categoria, respectivamente.
