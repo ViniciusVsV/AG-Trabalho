@@ -27,23 +27,27 @@ class Disciplina:
         self.semestre = semestre
         self.anualidade = anualidade == 'SIM'
         self.carga_horaria = carga_horaria
+
         self.pre_requisitos = PreRequisito(pre_requisitos)
         self.equivalentes = Equivalente(equivalentes)
-        self.correquisitos = set(corr.strip() for corr in correquisito.split(',')) if correquisito and correquisito != '-' else set()
-        self.peso = 0.0 if categoria == "OPTATIVA" else peso
-        self.turmas: list[(int, str)] = []
 
-    def adicionar_turma(self, horario: str, nro_turma: int):
+        self.correquisitos = set(corr.strip() for corr in correquisito.split(',')) if correquisito and correquisito != '-' else set()
+        self.peso = peso if categoria == "OBRIGATORIA" else 0.0
+
+        self.turmas: list[(int, str, int)] = []
+
+    def AdicionaTurmas(self, nro_turma: int, horario: str, semestre: int, ):
         """
         Adiciona um horário de turma à disciplina.
 
         Args:
-            horario (str): Horário da turma a ser adicionada.
             nro_turma (int): Número da turma a ser adicionada.
+            horario (str): Horário da turma a ser adicionada.
+            semestre (int): Semestre do ano da turma a ser adicionada.
         """
-        self.turmas.append((nro_turma, horario))
+        self.turmas.append((nro_turma, horario, semestre))
 
-    def criaTurmas(self) -> list['Turma']:
+    def CriaTurmas(self) -> list['Turma']:
         """
         Cria uma lista de objetos Turma a partir dos horários da disciplina.
 
@@ -51,8 +55,8 @@ class Disciplina:
             list[Turma]: Lista de objetos Turma criados.
         """
         turmas = []
-        for (nro_turma, horario) in self.turmas:
-            turmas.append(Turma(self, nro_turma=nro_turma, horarios=horario, peso=self.peso))
+        for (nro_turma, horario, semestre) in self.turmas:
+            turmas.append(Turma(self, nro_turma=nro_turma, horarios=horario, semestre=semestre, peso=self.peso))
         return turmas
 
     def isPreRequisito(self, outro: 'Disciplina') -> bool:
@@ -103,10 +107,11 @@ class Disciplina:
         return f"Disciplina(sigla={self.sigla}, nome={self.nome})"
 
 class Turma:
-    def __init__(self, disciplina: 'Disciplina', nro_turma: int, horarios: str, peso: float = 0.0):
+    def __init__(self, disciplina: 'Disciplina', nro_turma: int, horarios: str, semestre: int, peso: float = 0.0):
         self.disciplina = disciplina
         self.nro_turma = nro_turma
         self.horarios = Horario(horarios)
+        self.semestre = semestre
 
         self.peso = peso
 

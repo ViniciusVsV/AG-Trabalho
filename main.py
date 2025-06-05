@@ -1,4 +1,4 @@
-from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraDisciplinas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
+from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurmas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
 from Objetos import Disciplina
 
 import pandas as pd
@@ -22,7 +22,7 @@ if __name__ == "__main__":
             # Atualmente usando input. Temporário
             caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
             
-            disciplinasCumpridas = set(["XDES01", "CRSC03", "XMAC01", "CAHCO4", "MAT00A"])
+            disciplinasCumpridas = set()
             curso = 'CCO'
             
             #(curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
@@ -52,8 +52,10 @@ if __name__ == "__main__":
             for index, row in dataframe.iterrows():
                 if (row['SIGLA'], row['CAT']) in disciplinasProcessadas:
                     # Se a disciplina já foi processada, apenas adiciona o horário
-                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].adicionar_turma(row['HOR']
-                                                                          , qtdTurmas # row['TURMA']
+                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].adicionar_turma(
+                                                                            qtdTurmas # row['TURMA']
+                                                                          , row['HOR']
+                                                                          , row['PER']
                                                                           )
                     qtdTurmas += 1
                     continue
@@ -68,17 +70,24 @@ if __name__ == "__main__":
                     carga_horaria   =   row['CH'],
                     pre_requisitos  =   row['REQ'],
                     equivalentes    =   row['EQV'],
-                    # correquisito  =   row['COR'],
+                    correquisito    =   row['COREQ'],
 
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.adicionar_turma(row['HOR'], qtdTurmas)
+                disciplina.adicionar_turma(qtdTurmas, row['HOR'], row['PER'])
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
 
                 disciplinas.append(disciplina)
+
+
+            for disciplina in disciplinas:
+                for turma in disciplina.criaTurmas():
+                    print(disciplina.nome + "---" + str(turma.semestre))
+
+            break
 
             # Constrói o grafo de pré-requisitos
             listaAdjDirigida = MontaListaAdjDirigida(disciplinas)

@@ -22,7 +22,7 @@ def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Disciplina], id: int,
     )
 
     # Obtém, ou cria, o diretório para salvar as imagens
-    caminhoDiretorio = os.path.join(".", "Imagens", f"Teste_{curso}_{id}")
+    caminhoDiretorio = os.path.join(".", "Resultados", f"Teste_{curso}_{id}")
     os.makedirs(caminhoDiretorio, exist_ok = True)
 
     diretorio = os.path.abspath(os.path.join(caminhoDiretorio, nomeImagem))
