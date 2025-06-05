@@ -52,10 +52,10 @@ if __name__ == "__main__":
             for index, row in dataframe.iterrows():
                 if (row['SIGLA'], row['CAT']) in disciplinasProcessadas:
                     # Se a disciplina já foi processada, apenas adiciona o horário
-                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].adicionar_turma(
+                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].AdicionaTurma(
                                                                             qtdTurmas # row['TURMA']
                                                                           , row['HOR']
-                                                                          , row['PER']
+                                                                          , row['PER'] % 2
                                                                           )
                     qtdTurmas += 1
                     continue
@@ -65,29 +65,22 @@ if __name__ == "__main__":
                     nome            =   row['NOME'],
                     curso           =   row['CURSO'],
                     categoria       =   row['CAT'],
-                    semestre        =   row['PER'],
+                    periodo         =   row['PER'],
                     anualidade      =   row['AN'],
-                    carga_horaria   =   row['CH'],
-                    pre_requisitos  =   row['REQ'],
+                    cargaHoraria    =   row['CH'],
+                    preRequisitos   =   row['REQ'],
                     equivalentes    =   row['EQV'],
-                    correquisito    =   row['COREQ'],
+                    correquisitos   =   row['COREQ'],
 
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.adicionar_turma(qtdTurmas, row['HOR'], row['PER'])
+                disciplina.AdicionaTurma(qtdTurmas, row['HOR'], row['PER'] % 2)
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
 
                 disciplinas.append(disciplina)
-
-
-            for disciplina in disciplinas:
-                for turma in disciplina.criaTurmas():
-                    print(disciplina.nome + "---" + str(turma.semestre))
-
-            break
 
             # Constrói o grafo de pré-requisitos
             listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
@@ -98,7 +91,7 @@ if __name__ == "__main__":
             disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
 
             # Filtra as disciplinas
-            disciplinasFiltradas = FiltraDisciplinas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+            disciplinasFiltradas = FiltraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
             # Obtém as turmas das disciplinas filtradas
             turmas = []

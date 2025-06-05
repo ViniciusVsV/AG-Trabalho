@@ -6,12 +6,12 @@ class Horario:
     def __init__(self, horario: str):
         self.__horario = horario
 
-        if not self.__verificaHorario():
+        if not self.__VerificaHorario():
             raise ValueError(f"Horário inválido. Deve estar no formato: /[2-7]+[M|T|N][1-5]+/. Recebido: {horario}")
         
-        self.__set = self.__parseHorario()
+        self.__setHorario = self.__ParseHorario()
 
-    def __verificaHorario(self) -> bool:
+    def __VerificaHorario(self) -> bool:
         """
         Verifica se o horário está no formato correto.
 
@@ -24,25 +24,27 @@ class Horario:
         Returns:
             bool: True se o horário estiver no formato correto, False caso contrário.
         """
+
         return bool(HORARIOS_REGEX.fullmatch(self.__horario))
     
-    def __parseHorario(self) -> set[str]:
+    def __ParseHorario(self) -> set[str]:
         """
         Converte o horário em um conjunto de strings representando cada horário individual.
 
         Returns:
             set[str]: Conjunto de horários individuais.
         """
-        horarios_set = set()
+
+        setHorarios = set()
 
         for horario in self.__horario.split():
             valor = HORARIOS_REGEX.split(horario)[2:-1]
 
             for dia in valor[0]:
                 for turno in valor[2]:
-                    horarios_set.add(f"{dia}{valor[1]}{turno}")
+                    setHorarios.add(f"{dia}{valor[1]}{turno}")
 
-        return horarios_set
+        return setHorarios
     
     def isConflitante(self, outro: 'Horario') -> bool:
         """
@@ -54,10 +56,11 @@ class Horario:
         Returns:
             bool: True se houver conflito de horários, False caso contrário.
         """
+
         if not isinstance(outro, Horario):
             raise TypeError("O parâmetro deve ser do tipo Horario.")
 
-        return not self.__set.isdisjoint(outro.__set)
+        return not self.__setHorario.isdisjoint(outro.__setHorario)
 
     def __str__(self) -> str:
         """

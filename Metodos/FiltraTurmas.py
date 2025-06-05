@@ -20,12 +20,12 @@ def FiltraTurmas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], 
         # Filtra da lista as disciplinas que já foram concluidas
         if disciplina.sigla in disciplinasCumpridas or disciplina.atendeEquivalencia(disciplinasCumpridas):
             disciplinasCumpridas.add(disciplina.sigla)
-            disciplinasCumpridas.update(disciplina.equivalentes.eq_set)
+            disciplinasCumpridas.update(disciplina.equivalentes.setEquivalentes)
 
             continue
 
         # Filtra da lista as disciplinas cujos pré requisitos não foram atendidos
-        if not disciplina.atendePreRequisitos(disciplinasCumpridas):
+        if not disciplina.VerificaPreRequisitos(disciplinasCumpridas):
             continue
 
         # Filtra da lista as disciplinas que possuem co-requisitos que não estão sendo recomendados ou não foram cumpridos
@@ -41,7 +41,7 @@ def FiltraTurmas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], 
     turmasFiltradas = []
 
     for disciplina in disciplinasFiltradas:
-        for turma in disciplina.criaTurmas():
+        for turma in disciplina.CriaTurmas():
             # Filtra da lista as turmas que não estão sendo ofertadas
             if turma.semestre % 2 != periodoAtual % 2:
                 continue

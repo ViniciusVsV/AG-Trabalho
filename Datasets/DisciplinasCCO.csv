@@ -30,26 +30,26 @@ XAHC02,Interação Humano Computador,CCO,OBRIGATORIA,6,NÃO,23T12,64,XDES03 E XD
 XAHC01,Computação e Sociedade,CCO,OBRIGATORIA,7,NÃO,4N1234,64,-,-,-
 XAHC03,Metodologia Científica,CCO,OBRIGATORIA,7,NÃO,56T12,64,-,-,-
 XDES01,Fundamentos de Programação,SIN,EQUIVALENTE,1,SIM,35N12,64,-,-,-
-ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,4M23 5M45	,64,-,-,-
-ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,2M23 3M45	,64,-,-,-
-ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,2M45 3M23	,64,-,-,-
+ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,4M23 5M45,64,-,-,-
+ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,2M23 3M45,64,-,-,-
+ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,1,NÃO,2M45 3M23,64,-,-,-
 ECOP11A,Técnicas de Programação,ECO,EQUIVALENTE,2,NÃO,2M45 3M12,64,-,-,-
 ELTD01A,Eletrônica Digital,ECO,EQUIVALENTE,1,NÃO,4M23,32,ECOM00 E ECOM10,-,-
 ELTD01A,Eletrônica Digital,ECO,EQUIVALENTE,2,NÃO,4T34,32,ECOM00 E ECOM10,-,-
 ELTD01A,Eletrônica Digital,ECO,EQUIVALENTE,2,NÃO,5T12,32,ECOM00 E ECOM10,-,-
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,6T2 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,5T34 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,5T12 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,6T34 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,2M23 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,2M45 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,3M23 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,3M45 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,4M23 ,16,-,-,ELTD01A
-ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,4M45 ,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,6T2,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,5T34,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,5T12,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,1,NÃO,6T34,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,2M23,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,2M45,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,3M23,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,3M45,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,4M23,16,-,-,ELTD01A
+ELTD11A,Laboratório de Eletônica Digital,ECO,EQUIVALENTE,2,NÃO,4M45,16,-,-,ELTD01A
 MAT00A,Cálculo A,MAT,EQUIVALENTE,1,NÃO,35N12,64,-,-,-
 MAT00A,Cálculo A,MAT,EQUIVALENTE,1,NÃO,2N12 4N34,64,-,-,-
-MAT00A,Cálculo A,MAT,EQUIVALENTE,1,NÃO,2M45 4M23	,64,-,-,-
+MAT00A,Cálculo A,MAT,EQUIVALENTE,1,NÃO,2M45 4M23,64,-,-,-
 MAT00A,Cálculo A,MAT,EQUIVALENTE,2,NÃO,24N12,64,-,-,-
 MAT00A,Cálculo A,MAT,EQUIVALENTE,2,NÃO,36T12,64,-,-,-
 MAT00A,Cálculo A,MAT,EQUIVALENTE,2,NÃO,24T34,64,-,-,-
@@ -111,8 +111,8 @@ ECOP14,Laboratório de Programação Embarcada,ECO,EQUIVALENTE,2,NÃO,6M23,32,-,
 ECOP14,Laboratório de Programação Embarcada,ECO,EQUIVALENTE,2,NÃO,6M45,32,-,-,TELC03A
 ECOP14,Laboratório de Programação Embarcada,ECO,EQUIVALENTE,2,NÃO,5M23,32,-,-,TELC03A
 ECOP14,Laboratório de Programação Embarcada,ECO,EQUIVALENTE,2,NÃO,5M45,32,-,-,TELC03A
-MAT012,Cálculo Númerico,MAT,EQUIVALENTE,1,NÃO,2M45 4M23	,64,MAT00A,-,-
-MAT013,Cálculo Númerico,MAT,EQUIVALENTE,1,NÃO,3N34 5N12        ,64,MAT00A,-,-
+MAT012,Cálculo Númerico,MAT,EQUIVALENTE,1,NÃO,2M45 4M23,64,MAT00A,-,-
+MAT013,Cálculo Númerico,MAT,EQUIVALENTE,1,NÃO,3N34 5N12,64,MAT00A,-,-
 ECOT03A,Banco de Dados,ECO,EQUIVALENTE,1,SIM,3M45,32,ECOT02A E ECOT12A,-,-
 ECOT13A,Laboratório de Banco de Dados,ECO,EQUIVALENTE,1,SIM,3T34,32,-,-,ECOT03A
 ECOT13A,Laboratório de Banco de Dados,ECO,EQUIVALENTE,1,SIM,3T12,32,-,-,ECOT03A
@@ -124,11 +124,11 @@ ADMO3E,Empreendedorismo Tecnológico,ADM,OPTATIVA,2,SIM,7M5 3N12,48,IEPG01,-,-
 ADMO3E,Empreendedorismo Tecnológico,SIN,OPTATIVA,2,SIM,3N345,48,IEPG01,-,-
 ADM08H,Psicologia - Processos Psicossociais Básicos: As relações indivíduo-Grupo,ADM,OPTATIVA,1,SIM,7T4 4N34,48,-,-,-
 ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,2N12 7N1,48,-,-,-
-ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,4T345 ,48,-,-,-
-ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,4M345 ,48,-,-,-
-ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,5T345 ,48,-,-,-
-ADM52H,Comportamento Organizacional II,ADM,OPTATIVA,2,SIM,5N34 ,32,-,-,-
-ADM54H,Gestão de Carreira,ADM,OPTATIVA,2,NÃO,4N34 ,32,-,-,-
+ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,4T345,48,-,-,-
+ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,4M345,48,-,-,-
+ADM51H,"Ciências, Tecnologia e Organizações",ADM,OPTATIVA,1,SIM,5T345,48,-,-,-
+ADM52H,Comportamento Organizacional II,ADM,OPTATIVA,2,SIM,5N34,32,-,-,-
+ADM54H,Gestão de Carreira,ADM,OPTATIVA,2,NÃO,4N34,32,-,-,-
 CDES13,Desenvolvimento de Jogos,CCO,OPTATIVA,2,SIM,3T34 5T12,64,XDES02,-,-
 CRSC08,Programação Paralela,CCO,OPTATIVA,1,SIM,6M45 4T12,64,XRSC01,-,-
 ECOS04,Simulação e Avaliação de Desempenho,ECO,OPTATIVA,1,SIM,3M45,32,(ECOS02A E ECOS12A) OU XRSC09,-,-
@@ -136,22 +136,22 @@ ECOX21,Maratona de Programação I,CCO,OPTATIVA,2,SIM,4N123,48,XDES01 OU ECOP11A
 IEPG01,Empreendedorismo e Inovação,ADM,OPTATIVA,1,NÃO,7M1 4N34,48,-,-,-
 IEPG01,Empreendedorismo e Inovação,ADM,OPTATIVA,1,NÃO,3N345,48,-,-,-
 IEPG01,Empreendedorismo e Inovação,ADM,OPTATIVA,2,NÃO,3T345,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,6M45 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,6T12 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,3M23 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,3T34 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,5M23 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,5T34 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,4T12 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,4N12 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5N34 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5T12 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,6T12 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,4M45 ,48,-,-,-
-IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5M23 ,48,-,-,-
-IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,2N34 ,32,-,-,-
-IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,3N34 ,32,-,-,-
-IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,5M45 ,32,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,6M45,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,6T12,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,3M23,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,3T34,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,5M23,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,5T34,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,1,NÃO,4T12,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,4N12,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5N34,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5T12,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,6T12,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,4M45,48,-,-,-
+IEPG10,Engenharia Econômica,ADM,OPTATIVA,2,NÃO,5M23,48,-,-,-
+IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,2N34,32,-,-,-
+IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,3N34,32,-,-,-
+IEPG14,Comportamento Organizacional I,ADM,OPTATIVA,2,SIM,5M45,32,-,-,-
 IEPG20,Introdução à Economia,ADM,OPTATIVA,1,NÃO,4N345,48,-,-,-
 IEPG20,Introdução à Economia,ADM,OPTATIVA,1,NÃO,2M123,48,-,-,-
 IEPG20,Introdução à Economia,ADM,OPTATIVA,1,NÃO,6T123,48,-,-,-

@@ -19,7 +19,7 @@ class Disciplina:
         peso (float): Peso da disciplina.
         turmas (list): Lista de turmas da disciplina.
     """
-    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, periodo: int, anualidade: str, cargaHoraria: int, preRequisitos: str = '-', equivalentes: str = '-', correquisito: str = '-', peso: float = 0.0):
+    def __init__(self, sigla: str, nome: str, curso: str, categoria: str, periodo: int, anualidade: str, cargaHoraria: int, preRequisitos: str = '-', equivalentes: str = '-', correquisitos: str = '-', peso: float = 0.0):
         self.sigla = sigla
         self.nome = nome
         self.curso = curso
@@ -30,13 +30,13 @@ class Disciplina:
 
         self.preRequisitos = PreRequisito(preRequisitos)
         self.equivalentes = Equivalente(equivalentes)
-        self.correquisitos = set(corr.strip() for corr in correquisito.split(',')) if correquisito and correquisito != '-' else set()
+        self.correquisitos = set(corr.strip() for corr in correquisitos.split(',')) if correquisitos and correquisitos != '-' else set()
         
         self.peso = peso if categoria == "OBRIGATORIA" else 0.0
 
         self.turmas: list[(int, str, int)] = []
 
-    def AdicionaTurmas(self, numeroTurma: int, horario: str, semestre: int, ):
+    def AdicionaTurma(self, numeroTurma: int, horario: str, semestre: int, ):
         """
         Adiciona uma turma à disciplina.
 
@@ -71,7 +71,7 @@ class Disciplina:
             bool: True se o pré-requisito for atendido, False caso contrário.
         """
 
-        return self.pre_requisitos.contem(outro.sigla)
+        return self.preRequisitos.Contem(outro.sigla)
     
     def VerificaPreRequisitos(self, disciplinasCumpridas: set[str]) -> bool:
         """
@@ -79,10 +79,12 @@ class Disciplina:
 
         Args:
             disciplinasCumpridas (set[str]): Conjunto de disciplinas já cursadas.
+        
         Returns:
             bool: True se os pré-requisitos foram atendidos, False caso contrário.
         """
-        return self.pre_requisitos.verifica(disciplinasCumpridas)
+        
+        return self.preRequisitos.Verifica(disciplinasCumpridas)
     
     def VerificaEquivalencia(self, disciplinasEquivalentes: set[str]) -> bool:
         """
@@ -90,10 +92,12 @@ class Disciplina:
 
         Args:
             disciplinasEquivalentes (set[str]): Conjunto de disciplinas equivalentes.
+        
         Returns:
             bool: True se alguma equivalência foi atendida, False caso contrário.
         """
-        return self.equivalentes.verifica(disciplinasEquivalentes)
+        
+        return self.equivalentes.Verifica(disciplinasEquivalentes)
 
     def __eq__(self, value):
         if not isinstance(value, Disciplina):
@@ -128,7 +132,7 @@ class Turma:
             bool: True se houver conflito de horários, False caso contrário.
         """
         
-        return self.horarios.isConflitante(outro.horarios)
+        return self.horario.isConflitante(outro.horarios)
     
     @property
     def sigla(self) -> str:

@@ -1,37 +1,45 @@
-from .Expression import tokenize, FalseExpression
+from .Expression import Tokenizar, ExpressaoFalsa
 
 class Equivalente:
     def __init__(self, equivalentes: str):
         self.__equivalentes = equivalentes
-        self.__eq_set = set()
+        self.__setEquivalentes = set()
 
         if equivalentes.strip() == '-':
-            self.__expression = FalseExpression()
+            self.__expressao = ExpressaoFalsa()
         else:
-            (self.__expression, self.__eq_set) = tokenize(equivalentes)
+            (self.__expressao, self.__setEquivalentes) = Tokenizar(equivalentes)
 
     @property
-    def eq_set(self) -> set[str]:
+    def setEquivalentes(self) -> set[str]:
         """
         Retorna o conjunto de equivalentes.
+        
         Returns:
             set: Conjunto de equivalentes.
         """
-        return self.__eq_set
+
+        return self.__setEquivalentes
 
     def __str__(self):
         """
         Retorna a representação em string das equivalentes.
-        """
-        return str(self.__expression)
 
-    def verifica(self, taken_courses: set[str]) -> bool:
+        Returns:
+            str: String de equivalentes
         """
-        Verifica se a equivalência foi atendido.
+
+        return str(self.__expressao)
+
+    def Verifica(self, disciplinasCumpridas: set[str]) -> bool:
+        """
+        Verifica se a equivalência foi atendida.
+        
         Args:
-            taken_courses (set): Lista de cursos já concluídos.
+            DisciplinasCumpridas (set): Set de siglas das disciplinas já concluídas.
         Returns:
             bool: True se a equivalência foi atendida, False caso contrário.
         """
-        return self.__expression.evaluate(taken_courses)
+
+        return self.__expressao.Avaliar(disciplinasCumpridas)
 
