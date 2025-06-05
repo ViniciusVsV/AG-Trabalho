@@ -1,4 +1,4 @@
-from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurmas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
+from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurmas, MontaListaAdjSimples, CalculaCIM, GeraGrafoPreRequisitos, GeraGrafoConflitosHorario
 from Objetos import Disciplina
 
 import pandas as pd
@@ -36,6 +36,8 @@ if __name__ == "__main__":
                 print("Digita certo carai")
                 continue
 
+            semestrePrevisao %= 2
+
             # Lê o dataset pertinente
             dataframe = pd.read_csv(
                 "Datasets/Disciplinas" + curso + ".csv" ,
@@ -52,11 +54,9 @@ if __name__ == "__main__":
             for index, row in dataframe.iterrows():
                 if (row['SIGLA'], row['CAT']) in disciplinasProcessadas:
                     # Se a disciplina já foi processada, apenas adiciona o horário
-                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].AdicionaTurma(
-                                                                            qtdTurmas # row['TURMA']
-                                                                          , row['HOR']
-                                                                          , row['PER'] % 2
-                                                                          )
+                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].\
+                        AdicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
+                    
                     qtdTurmas += 1
                     continue
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.AdicionaTurma(qtdTurmas, row['HOR'], row['PER'] % 2)
+                disciplina.AdicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
@@ -85,31 +85,27 @@ if __name__ == "__main__":
             # Constrói o grafo de pré-requisitos
             listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
 
-            GeraGrafo(listaAdjDirigida, disciplinas, id, curso, True)
+            GeraGrafoPreRequisitos(listaAdjDirigida, disciplinas, curso, id)
 
             # Calcula os pesos das disciplinas
             disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
 
-            # Filtra as disciplinas
-            disciplinasFiltradas = FiltraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+            # Filtra as disciplinas e obtém as turmas disponíveis
+            turmasFiltradas = FiltraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            # Obtém as turmas das disciplinas filtradas
-            turmas = []
+            # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
+            listaAdjSimples = MontaListaAdjSimples(turmasFiltradas, False)
+            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, id, False)
 
-            for disciplina in disciplinasFiltradas:
-                turmas.extend(disciplina.criaTurmas())
-
-            # Constrói o grafo de conflitos de horários
-            listaAdjSimples = MontaListaAdjSimples(turmas)
-
-            GeraGrafo(listaAdjSimples, disciplinasFiltradas, id, curso, False)
+            listaAdjSimples = MontaListaAdjSimples(turmasFiltradas, True)
+            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, id, True)
 
             # Calcula os conjuntos independentes
 
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário
-            pesosOrdenados = sorted(disciplinasFiltradas, key=lambda d: d.peso, reverse=True)
+            pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
 
             for p in pesosOrdenados:
-                print(p.sigla, "-", p.nome, "--", p.categoria, "---", p.curso, "----", p.peso, "--- Turmas:", len(p.turmas))
+                print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.peso)

@@ -32,7 +32,7 @@ class Disciplina:
         self.equivalentes = Equivalente(equivalentes)
         self.correquisitos = set(corr.strip() for corr in correquisitos.split(',')) if correquisitos and correquisitos != '-' else set()
         
-        self.peso = peso if categoria == "OBRIGATORIA" else 0.0
+        self.peso = 0.0 if categoria == "OPTATIVA" else peso
 
         self.turmas: list[(int, str, int)] = []
 
@@ -132,7 +132,7 @@ class Turma:
             bool: True se houver conflito de horários, False caso contrário.
         """
         
-        return self.horario.isConflitante(outro.horarios)
+        return self.horario.isConflitante(outro.horario)
     
     @property
     def sigla(self) -> str:

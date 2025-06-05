@@ -1,46 +1,9 @@
-from Objetos import Disciplina
+from Objetos import Disciplina, Turma
 
 from igraph import Graph, plot
 import os
 
-def GeraGrafo(listaAdj: list[list[int]], disciplinas: list[Disciplina], id: int, curso: str, dirigido: bool) -> None:
-    """
-    Gera e salva uma grafo, simples ou dirigido, a partir da lista de adjacencia de disciplinas recebida
-    Args:
-        listaAdj (list[list[int]]): Lista de adjacência do grafo a ser construído.
-        disciplinas (list[Disciplina]): Lista das disciplinas a serem incluidas no grafo.
-        dirigido (bool):  Booleana que dita se o grafo é dirigido ou não.
-
-    Retorna:
-        None
-    """ 
-
-    # Chama a função pertinente para obter os dados necessários
-    (grafo, layout, nomeImagem) = (
-        GeraGrafoPreRequisitos(listaAdj, disciplinas) if dirigido == True
-        else GeraGrafoConflitosHorario(listaAdj, disciplinas)
-    )
-
-    # Obtém, ou cria, o diretório para salvar as imagens
-    caminhoDiretorio = os.path.join(".", "Resultados", f"Teste_{curso}_{id}")
-    os.makedirs(caminhoDiretorio, exist_ok = True)
-
-    diretorio = os.path.abspath(os.path.join(caminhoDiretorio, nomeImagem))
-
-    # Desenha o grafo e gera a imagem
-    plot(
-        grafo,
-        layout = layout,
-        vertex_label = grafo.vs["label"],
-        vertex_color = grafo.vs["color"],
-        vertex_size = 60,
-        edge_color = "gray",
-        bbox = (2000, 2000),
-        margin = 50,
-        target = diretorio
-    )
-
-def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> tuple[Graph, str, str]:
+def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Disciplina], curso: str, id: int) -> None:
     grafo = Graph(directed = True)
 
     # Cria e adiciona os vértices
@@ -74,9 +37,9 @@ def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Discipli
     # Define o layout do grafo e retorna os dados
     layout = grafo.layout("tree")
 
-    return grafo, layout, "Grafo_Pre_Requisitos.png"
+    DesenhaGrafo(grafo, layout, curso, "GrafoPreRequisitos.png", id, True)
 
-def GeraGrafoConflitosHorario(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> tuple[Graph, str, str]:
+def GeraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], curso: str, id: int, interconectado: bool = False) -> None:
     grafo = Graph(directed = False)
 
     # Adiciona os vértices
@@ -85,20 +48,17 @@ def GeraGrafoConflitosHorario(listaAdj: list[list[int]], disciplinas: list[Disci
     cores = []
     i = 0
 
-    for disciplina in disciplinas:
-        turmas = disciplina.criaTurmas()
+    for turma in turmas:
+        siglasPrefixos.append(str(i) + "_" + turma.sigla)
+        siglasNormais.append(turma.sigla)
 
-        for turma in turmas:
-            siglasPrefixos.append(str(i) + "_" + disciplina.sigla)
-            siglasNormais.append(disciplina.sigla)
+        cores.append(
+            "lightblue" if turma.disciplina.categoria == "OBRIGATORIA" else
+            "yellow" if turma.disciplina.categoria == "EQUIVALENTE" else
+            "orange"
+        )
 
-            cores.append(
-                "lightblue" if disciplina.categoria == "OBRIGATORIA" else
-                "yellow" if disciplina.categoria == "EQUIVALENTE" else
-                "orange"
-            )
-
-            i += 1
+        i += 1
 
     grafo.add_vertices(siglasPrefixos)  
 
@@ -114,4 +74,42 @@ def GeraGrafoConflitosHorario(listaAdj: list[list[int]], disciplinas: list[Disci
     # Define o layout para o grafo e retorna os dados
     layout = grafo.layout("fr")
 
-    return grafo, layout, "Grafo_Conflitos_Horario.png"
+    nomeImagem = "GrafoConflitosHorariosInterconectado.png" if interconectado else "GrafoConflitosHorarios.png"
+
+    DesenhaGrafo(grafo, layout, curso, nomeImagem, id, False)
+
+def DesenhaGrafo(grafo: Graph, layout: str, curso: str, nomeImagem: str, id: int, preRequisito: bool) -> None:
+    """
+    Desenha e salva um grafo, simples ou dirigido, no diretorio referente ao caso de uso
+    
+    Args:
+        grafo (Graph): Grafo montado a ser desenhado e salvo.
+        curso (str): Curso do discente.
+        nomeImagem (str): Nome do arquivo da imagem que será salva.
+        id (int): Id único do caso de teste.
+        preRequisito (bool): Caso o grafo produzido é de pré-requisistos (dirigido).
+    
+    Retorna:
+        None
+    """ 
+
+    # Obtém, ou cria, o diretório para salvar as imagens
+    caminhoDiretorio = os.path.join(".", "Resultados", curso) if preRequisito else\
+        os.path.join(".", "Resultados", curso, f"{id}")
+
+    os.makedirs(caminhoDiretorio, exist_ok = True)
+
+    diretorio = os.path.abspath(os.path.join(caminhoDiretorio, nomeImagem))
+
+    # Desenha o grafo e gera a imagem
+    plot(
+        grafo,
+        layout = layout,
+        vertex_label = grafo.vs["label"],
+        vertex_color = grafo.vs["color"],
+        vertex_size = 60,
+        edge_color = "gray",
+        bbox = (2000, 2000),
+        margin = 50,
+        target = diretorio
+    )
