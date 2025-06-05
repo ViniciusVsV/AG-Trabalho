@@ -23,4 +23,4 @@ from Objetos.Equivalente import Equivalente
 ])
 def test_parse_equivalentes_validos(input_str, taken_courses, expected):
     eq = Equivalente(input_str)
-    assert eq.verifica(taken_courses) == expected, f"Falha para {input_str} com {taken_courses}"
+    assert eq.Verifica(taken_courses) == expected, f"Falha para {input_str} com {taken_courses}"

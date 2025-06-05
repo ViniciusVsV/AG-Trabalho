@@ -43,7 +43,7 @@ def test_prerequisito_verifica(prereq_str, taken_courses, expected):
     Testa o método verifica para diferentes pré-requisitos e listas de disciplinas cursadas.
     """
     prereq = PreRequisito(prereq_str)
-    assert prereq.verifica(taken_courses) == expected, f"Falha para {prereq_str} com {taken_courses}"
+    assert prereq.Verifica(taken_courses) == expected, f"Falha para {prereq_str} com {taken_courses}"
 
 
 @pytest.mark.parametrize("prereq_str", [
@@ -107,4 +107,4 @@ def test_prerequisito_contem(prereq_str, course, expected):
     Testa o método contem para verificar se um curso específico está nos pré-requisitos.
     """
     prereq = PreRequisito(prereq_str)
-    assert prereq.contem(course) == expected, f"Falha para {prereq_str} com {course}. {prereq.pre_reqset}"
+    assert prereq.Contem(course) == expected, f"Falha para {prereq_str} com {course}. {prereq.pre_reqset}"
