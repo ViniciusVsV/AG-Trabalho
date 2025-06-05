@@ -8,31 +8,34 @@ from Objetos import Disciplina, Turma
             Turma(
                 disciplina=Disciplina(
                     sigla="MAT101", nome="Matemática I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M12 3T3",
+                numeroTurma=1,
+                horario="2M12 3T3",
+                semestre=1,
                 peso=0.0
             ),
             Turma(
                 disciplina=Disciplina(
                     sigla="FIS101", nome="Física I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M23 3T2",
+                numeroTurma=1,
+                horario="2M23 3T2",
+                semestre=1,
                 peso=0.0
             ),
             Turma(
                 disciplina=Disciplina(
                     sigla="QUI101", nome="Química I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="4M1 5T2",
+                numeroTurma=1,
+                horario="4M1 5T2",
+                semestre=1,
                 peso=0.0
             )
         ],
@@ -47,31 +50,34 @@ from Objetos import Disciplina, Turma
             Turma(
                 disciplina=Disciplina(
                     sigla="MAT101", nome="Matemática I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M12 3T3",
+                numeroTurma=1,
+                horario="2M12 3T3",
+                semestre=1,
                 peso=0.0
             ),
             Turma(
                 disciplina=Disciplina(
                     sigla="FIS101", nome="Física I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M23 3T2",
+                numeroTurma=1,
+                horario="2M23 3T2",
+                semestre=1,
                 peso=0.0
             ),
             Turma(
                 disciplina=Disciplina(
                     sigla="BIO101", nome="Biologia I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M1 3T3",
+                numeroTurma=1,
+                horario="2M1 3T3",
+                semestre=1,
                 peso=0.0
             )
         ],
@@ -86,21 +92,23 @@ from Objetos import Disciplina, Turma
             Turma(
                 disciplina=Disciplina(
                     sigla="MAT101", nome="Matemática I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="2M1 3T3",
+                numeroTurma=1,
+                horario="2M1 3T3",
+                semestre=1,
                 peso=0.0
             ),
             Turma(
                 disciplina=Disciplina(
                     sigla="FIS101", nome="Física I", curso="CCO",
-                    categoria="Obrigatória", semestre=1, anualidade="NÃO",
-                    carga_horaria=60
+                    categoria="Obrigatória", periodo=1, anualidade="NÃO",
+                    cargaHoraria=60
                 ),
-                nro_turma=1,
-                horarios="4M1 5T2",
+                numeroTurma=1,
+                horario="4M1 5T2",
+                semestre=1,
                 peso=0.0
             )
         ],
