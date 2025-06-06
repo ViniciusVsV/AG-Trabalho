@@ -13,4 +13,4 @@ def LeHistorico(caminhoArquivo: str) -> tuple[str, set[str]]:
 
     historico = Historico(caminhoArquivo)
 
-    return historico.curso, sorted(historico.disciplinas_aprovadas)
+    return historico.curso, historico.disciplinasAprovadas

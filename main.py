@@ -20,12 +20,12 @@ if __name__ == "__main__":
 
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
+            caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
             
-            disciplinasCumpridas = set()
-            curso = 'CCO'
+            # disciplinasCumpridas = set(["XDES01", "MAT00A", "CRSC03", "CAHC04", "XMAC01", "CTCO01", "CRSC04", "CMAC04", "MAT00B"])
+            # curso = 'CCO'
             
-            #(curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
 
             preferenciasOptativas = []
             
