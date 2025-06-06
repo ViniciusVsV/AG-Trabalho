@@ -1,4 +1,4 @@
-from Objetos import Disciplina
+from Objetos import Disciplina, Turma
 
 from igraph import Graph, plot
 import os
@@ -86,7 +86,7 @@ def GeraGrafoConflitosHorario(listaAdj: list[list[int]], disciplinas: list[Disci
     i = 0
 
     for disciplina in disciplinas:
-        turmas = disciplina.criaTurmas()
+        turmas = disciplina.cria_turmas()
 
         for turma in turmas:
             siglasPrefixos.append(str(i) + "_" + disciplina.sigla)

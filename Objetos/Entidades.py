@@ -36,7 +36,7 @@ class Disciplina:
 
         self.turmas: list[(int, str, int)] = []
 
-    def AdicionaTurmas(self, nro_turma: int, horario: str, semestre: int, ):
+    def adicionar_turma(self, nro_turma: int, horario: str, semestre: int, ):
         """
         Adiciona um horário de turma à disciplina.
 
@@ -47,7 +47,7 @@ class Disciplina:
         """
         self.turmas.append((nro_turma, horario, semestre))
 
-    def CriaTurmas(self) -> list['Turma']:
+    def cria_turmas(self) -> list['Turma']:
         """
         Cria uma lista de objetos Turma a partir dos horários da disciplina.
 
@@ -128,14 +128,14 @@ class Turma:
         return self.horarios.isConflitante(outro.horarios)
     
     @property
-    def codigo(self) -> str:
+    def sigla(self) -> str:
         """
         Retorna o código da disciplina associada à turma.
 
         Returns:
             str: Código da disciplina.
         """
-        return self.disciplina.codigo
+        return self.disciplina.sigla
 
     # Só para garantir que a verificação de igualdade funcione corretamente
     # Estava dando problema por causa que comparada as referências de objetos
@@ -144,11 +144,14 @@ class Turma:
         if not isinstance(value, Turma):
             return False
 
-        if self.codigo != value.codigo:
+        if self.sigla != value.sigla:
             return False
 
         if self.peso != value.peso:
             return False
 
     def __str__(self):
-        return f"Turma(disciplina={self.disciplina.codigo}, nro_turma={self.nro_turma}, horarios={self.horarios})"
+        return f"Turma(disciplina={self.disciplina.sigla}, nro_turma={self.nro_turma}, horarios={self.horarios})"
+    
+    def __hash__(self):
+        return hash((self.disciplina.sigla, self.nro_turma, self.horarios, self.semestre))

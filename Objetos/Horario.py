@@ -4,7 +4,7 @@ HORARIOS_REGEX = re.compile(r"(([2-7]+)([M|T|N])([1-5]+)\s?)+")
 
 class Horario:
     def __init__(self, horario: str):
-        self.__horario = horario
+        self.__horario = horario.strip()
 
         if not self.__verificaHorario():
             raise ValueError(f"Horário inválido. Deve estar no formato: /[2-7]+[M|T|N][1-5]+/. Recebido: {horario}")

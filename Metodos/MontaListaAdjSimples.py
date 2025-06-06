@@ -18,7 +18,7 @@ def MontaListaAdjSimples(turmasFiltradas: list[Turma]) -> list[list[int]]:
     # Preenche a lista de adjacência com os conflitos de horários
     for i in range(n):
         for j in range(i + 1, n):
-            if turmasFiltradas[i].verificaHorarioConflitante(turmasFiltradas[j]):
+            if turmasFiltradas[i].verificaHorarioConflitante(turmasFiltradas[j]) or turmasFiltradas[i].disciplina.sigla == turmasFiltradas[j].disciplina.sigla:
                 listaAdj[i].append(j)
                 listaAdj[j].append(i)
 

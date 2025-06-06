@@ -1,5 +1,6 @@
 from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurmas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
 from Objetos import Disciplina
+from Metodos.mwis.branchAndBound import BranchAndBound
 
 import pandas as pd
 import uuid
@@ -22,10 +23,11 @@ if __name__ == "__main__":
             # Atualmente usando input. Temporário
             caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
             
-            disciplinasCumpridas = set()
-            curso = 'CCO'
+            #disciplinasCumpridas = set()
+            #curso = 'CCO'
             
-            #(curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            print(f"Disciplinas cumpridas: {disciplinasCumpridas}")
 
             preferenciasOptativas = []
             
@@ -44,7 +46,7 @@ if __name__ == "__main__":
             )
 
             # Cria o array das disciplinas do curso
-            disciplinas = []
+            disciplinas: list[Disciplina] = []
             disciplinasProcessadas: dict[tuple[str, str], Disciplina] = dict()
 
             qtdTurmas = 0
@@ -83,40 +85,42 @@ if __name__ == "__main__":
                 disciplinas.append(disciplina)
 
 
-            for disciplina in disciplinas:
-                for turma in disciplina.criaTurmas():
-                    print(disciplina.nome + "---" + str(turma.semestre))
-
-            break
+            # for disciplina in disciplinas:
+            #     for turma in disciplina.cria_turmas():
+            #         print(disciplina.nome + "---" + str(turma.semestre))
 
             # Constrói o grafo de pré-requisitos
             listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
 
-            GeraGrafo(listaAdjDirigida, disciplinas, id, curso, True)
+            # GeraGrafo(listaAdjDirigida, disciplinas, id, curso, True)
 
             # Calcula os pesos das disciplinas
             disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
 
             # Filtra as disciplinas
-            disciplinasFiltradas = FiltraDisciplinas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+            turmas = FiltraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            # Obtém as turmas das disciplinas filtradas
-            turmas = []
-
-            for disciplina in disciplinasFiltradas:
-                turmas.extend(disciplina.criaTurmas())
+            for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmas)]:
+                print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
 
             # Constrói o grafo de conflitos de horários
             listaAdjSimples = MontaListaAdjSimples(turmas)
 
-            GeraGrafo(listaAdjSimples, disciplinasFiltradas, id, curso, False)
+            # GeraGrafo(listaAdjSimples, disciplinasFiltradas, id, curso, False)
 
             # Calcula os conjuntos independentes
+            conjuntoIM = BranchAndBound(
+                (turmas, listaAdjSimples)
+            )
 
+            print(f"Conjunto Independente Máximo (CIM):")
+            for turma in conjuntoIM.cmi:
+                print(f"{turma.disciplina.sigla} - {turma.disciplina.nome} - {turma.horarios} ({turma.peso})")
+            print(f"Peso do Conjunto Independente Máximo (CIM): {conjuntoIM.max_weight}")
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário
-            pesosOrdenados = sorted(disciplinasFiltradas, key=lambda d: d.peso, reverse=True)
+            # pesosOrdenados = sorted(turmas, key=lambda d: d.peso, reverse=True)
 
-            for p in pesosOrdenados:
-                print(p.sigla, "-", p.nome, "--", p.categoria, "---", p.curso, "----", p.peso, "--- Turmas:", len(p.turmas))
+            # for p in pesosOrdenados:
+            #     print(p.disciplina.sigla, "-", p.disciplina.nome, "--", p.disciplina.categoria, "---", p.disciplina.curso, "----", p.peso)

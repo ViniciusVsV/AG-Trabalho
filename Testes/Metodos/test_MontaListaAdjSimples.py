@@ -13,7 +13,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M12 3T3",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             ),
             Turma(
                 disciplina=Disciplina(
@@ -23,7 +24,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M23 3T2",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             ),
             Turma(
                 disciplina=Disciplina(
@@ -33,7 +35,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="4M1 5T2",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             )
         ],
         [
@@ -52,7 +55,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M12 3T3",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             ),
             Turma(
                 disciplina=Disciplina(
@@ -62,7 +66,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M23 3T2",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             ),
             Turma(
                 disciplina=Disciplina(
@@ -72,7 +77,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M1 3T3",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             )
         ],
         [
@@ -91,7 +97,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="2M1 3T3",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             ),
             Turma(
                 disciplina=Disciplina(
@@ -101,7 +108,8 @@ from Objetos import Disciplina, Turma
                 ),
                 nro_turma=1,
                 horarios="4M1 5T2",
-                peso=0.0
+                peso=0.0,
+                semestre=1
             )
         ],
         [

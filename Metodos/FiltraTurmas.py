@@ -14,7 +14,7 @@ def FiltraTurmas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], 
     """
 
     # Primeiro, filtra disciplinas
-    disciplinasFiltradas = []
+    disciplinasFiltradas: list[Disciplina] = []
 
     for disciplina in disciplinas:
         # Filtra da lista as disciplinas que já foram concluidas
@@ -41,7 +41,7 @@ def FiltraTurmas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], 
     turmasFiltradas = []
 
     for disciplina in disciplinasFiltradas:
-        for turma in disciplina.criaTurmas():
+        for turma in disciplina.cria_turmas():
             # Filtra da lista as turmas que não estão sendo ofertadas
             if turma.semestre % 2 != periodoAtual % 2:
                 continue
