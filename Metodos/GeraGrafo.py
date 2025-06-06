@@ -3,7 +3,7 @@ from Objetos import Disciplina, Turma
 from igraph import Graph, plot
 import os
 
-def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Disciplina], curso: str, id: int) -> None:
+def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Disciplina], curso: str) -> None:
     grafo = Graph(directed = True)
 
     # Cria e adiciona os vértices
@@ -37,9 +37,9 @@ def GeraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Discipli
     # Define o layout do grafo e retorna os dados
     layout = grafo.layout("tree")
 
-    DesenhaGrafo(grafo, layout, curso, "GrafoPreRequisitos.png", id, True)
+    DesenhaGrafo(grafo, layout, curso, "GrafoPreRequisitos.png", True)
 
-def GeraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], curso: str, id: int, interconectado: bool = False) -> None:
+def GeraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], curso: str, interconectado: bool = False) -> None:
     grafo = Graph(directed = False)
 
     # Adiciona os vértices
@@ -76,9 +76,9 @@ def GeraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], cu
 
     nomeImagem = "GrafoConflitosHorariosInterconectado.png" if interconectado else "GrafoConflitosHorarios.png"
 
-    DesenhaGrafo(grafo, layout, curso, nomeImagem, id, False)
+    DesenhaGrafo(grafo, layout, curso, nomeImagem, False)
 
-def DesenhaGrafo(grafo: Graph, layout: str, curso: str, nomeImagem: str, id: int, preRequisito: bool) -> None:
+def DesenhaGrafo(grafo: Graph, layout: str, curso: str, nomeImagem: str, preRequisito: bool) -> None:
     """
     Desenha e salva um grafo, simples ou dirigido, no diretorio referente ao caso de uso
     
@@ -86,7 +86,6 @@ def DesenhaGrafo(grafo: Graph, layout: str, curso: str, nomeImagem: str, id: int
         grafo (Graph): Grafo montado a ser desenhado e salvo.
         curso (str): Curso do discente.
         nomeImagem (str): Nome do arquivo da imagem que será salva.
-        id (int): Id único do caso de teste.
         preRequisito (bool): Caso o grafo produzido é de pré-requisistos (dirigido).
     
     Retorna:
@@ -95,7 +94,7 @@ def DesenhaGrafo(grafo: Graph, layout: str, curso: str, nomeImagem: str, id: int
 
     # Obtém, ou cria, o diretório para salvar as imagens
     caminhoDiretorio = os.path.join(".", "Resultados", curso) if preRequisito else\
-        os.path.join(".", "Resultados", curso, f"{id}")
+        os.path.join(".", "Resultados", curso)
 
     os.makedirs(caminhoDiretorio, exist_ok = True)
 

@@ -2,7 +2,6 @@ from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurm
 from Objetos import Disciplina
 
 import pandas as pd
-import uuid
 
 if __name__ == "__main__":
     while True:
@@ -16,16 +15,14 @@ if __name__ == "__main__":
             break
 
         else:
-            id = str(uuid.uuid4())
-
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
             caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
             
-            # disciplinasCumpridas = set(["XDES01", "MAT00A", "CRSC03", "CAHC04", "XMAC01", "CTCO01", "CRSC04", "CMAC04", "MAT00B"])
-            # curso = 'CCO'
+            disciplinasCumpridas = set()
+            curso = 'SIN'
             
-            (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            # (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
 
             preferenciasOptativas = []
             
@@ -85,7 +82,7 @@ if __name__ == "__main__":
             # Constrói o grafo de pré-requisitos
             listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
 
-            GeraGrafoPreRequisitos(listaAdjDirigida, disciplinas, curso, id)
+            GeraGrafoPreRequisitos(listaAdjDirigida, disciplinas, curso)
 
             # Calcula os pesos das disciplinas
             disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
@@ -95,10 +92,10 @@ if __name__ == "__main__":
 
             # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
             listaAdjSimples = MontaListaAdjSimples(turmasFiltradas, False)
-            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, id, False)
+            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, False)
 
             listaAdjSimples = MontaListaAdjSimples(turmasFiltradas, True)
-            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, id, True)
+            GeraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, True)
 
             # Calcula os conjuntos independentes
 
