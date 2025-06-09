@@ -20,7 +20,7 @@ if __name__ == "__main__":
             caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
             
             disciplinasCumpridas = set()
-            curso = 'SIN'
+            curso = 'CCO'
             
             # (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
 
