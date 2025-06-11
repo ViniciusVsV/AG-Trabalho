@@ -18,7 +18,7 @@ if __name__ == "__main__":
         else:
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
+            caminhoArquivo = "./Testes/Historicos/Historico_RB.pdf"
             
             #disciplinasCumpridas = set()
             #curso = 'CCO'
@@ -91,8 +91,8 @@ if __name__ == "__main__":
             # Filtra as disciplinas e obtém as turmas disponíveis
             turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
-                print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
+            #for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
+            #    print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
 
             # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
             listaAdjSimples = montaListaAdjSimples(turmasFiltradas, False)
