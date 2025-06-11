@@ -18,7 +18,7 @@ if __name__ == "__main__":
         else:
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            caminhoArquivo = "./Testes/Historicos/Historico_RB.pdf"
+            caminhoArquivo = "./Testes/Historicos/Historico_CCO_LV.pdf"
             
             #disciplinasCumpridas = set()
             #curso = 'CCO'
@@ -73,7 +73,7 @@ if __name__ == "__main__":
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['PER'])
+                disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário
-            # pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
+            #pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
 
-            # for p in pesosOrdenados:
-            #     print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.peso)
+            #for p in pesosOrdenados:
+            #    print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.horario, "---", p.semestre)
