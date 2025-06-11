@@ -1,6 +1,6 @@
 from Objetos import Disciplina
 
-def MontaListaAdjDirigida(disciplinas: list[Disciplina]) -> list[list[int]]:
+def montaListaAdjDirigida(disciplinas: list[Disciplina]) -> list[list[int]]:
     """
     Gera uma lista de adjacência dirigida a partir da lista de disciplinas recebida.
     Args:

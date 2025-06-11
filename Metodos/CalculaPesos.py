@@ -1,6 +1,6 @@
 from Objetos import Disciplina
 
-def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> list[Disciplina]:
+def calculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> list[Disciplina]:
     """
     Calcula os pesos dos vértices do grafo dirigido recebido com uma BFS.
     Os pesos serão calculados percorrendo o grafo de trás para frente (matéria mais ao fim do curso para a mais ao inícnio), somando ao vértice atual os pesos de todos os vértices predecessores.
@@ -30,7 +30,7 @@ def CalculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> li
 
 def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Disciplina], pesoPropagado: float):
     # Obtém os multiplicadores de pesos
-    [multiplicadorAnualidade, multiplicadorCategoria] = ObtemMultiplicadores(disciplinas[indiceV])
+    [multiplicadorAnualidade, multiplicadorCategoria] = obtemMultiplicadores(disciplinas[indiceV])
 
     # Soma o peso base ao peso propagado vezes os multiplicadores
     disciplinas[indiceV].peso += pesoPropagado * multiplicadorAnualidade * multiplicadorCategoria
@@ -39,7 +39,7 @@ def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Disciplina], 
     for adjacente in listaAdj[indiceV]:
         DFS(adjacente, listaAdj, disciplinas, disciplinas[indiceV].peso)
 
-def ObtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
+def obtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
     """
     Obtém os valores para os multiplicadores do peso de acordo com a anualidade e categoria da disciplina.
     Args:

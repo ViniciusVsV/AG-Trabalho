@@ -107,4 +107,4 @@ def test_prerequisito_contem(prereq_str, course, expected):
     Testa o método contem para verificar se um curso específico está nos pré-requisitos.
     """
     prereq = PreRequisito(prereq_str)
-    assert prereq.contem(course) == expected, f"Falha para {prereq_str} com {course}. {prereq.pre_reqset}"
+    assert prereq.contem(course) == expected, f"Falha para {prereq_str} com {course}. {prereq.setPreRequisitos}"

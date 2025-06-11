@@ -1,8 +1,8 @@
 import pytest
-from Metodos.FiltraTurmas import FiltraTurmas
+from Metodos.FiltraTurmas import filtraTurmas
 from Objetos import Disciplina
 
-@pytest.mark.parametrize("disciplinas, disciplinasCumpridas, periodoAtual, expected", [
+@pytest.mark.parametrize("disciplinas, disciplinasCumpridas, semestreAtual, expected", [
     # Teste do filtro de disciplinas que não estão sendo ofertadas
     (
         [
@@ -11,27 +11,30 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M3", 1)]
             ),
             Disciplina(
                 sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M2", 2)]
             ),
             Disciplina(
                 sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M1", 2)]
             )
         ],
         set(),
@@ -47,40 +50,44 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-"
+                cargaHoraria=60,
+                preRequisitos="-",
+                turmas=[(1, "2M4", 1)]
             ),
             Disciplina(
                 sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-"
+                cargaHoraria=60,
+                preRequisitos="-",
+                turmas=[(1, "2M3", 1)]
             ),
             Disciplina(
                 sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-"
+                cargaHoraria=60,
+                preRequisitos="-",
+                turmas=[(1, "2M2", 1)]
             ),
             Disciplina(
                 sigla="MAT102",
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=3,
+                periodo=3,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101"
+                cargaHoraria=60,
+                preRequisitos="MAT101",
+                turmas=[(1, "2M1", 3)]
             )
         ],
         set(),
@@ -96,27 +103,30 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M1", 1)]
             ),
             Disciplina(
                 sigla="FIS101",
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M2", 1)]
             ),
             Disciplina(
                 sigla="QUI101",
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60
+                cargaHoraria=60,
+                turmas=[(1, "2M3", 1)]
             )
         ],
         {"MAT101", "FIS101"},
@@ -124,10 +134,7 @@ from Objetos import Disciplina
         {"QUI101"}
     )
 ])
-@pytest.mark.skip("Tem que consertar")
-def test_FiltraDisciplinas(disciplinas, disciplinasCumpridas, periodoAtual, expected):
-    disciplinasFiltradas = FiltraTurmas(disciplinas, disciplinasCumpridas, periodoAtual)
-    disciplinasFiltradas_siglas = {disc.sigla for disc in disciplinasFiltradas}
-    assert expected.issubset(disciplinasFiltradas_siglas), f"Esperado {expected}, mas obteve {disciplinasFiltradas_siglas} para {[x.sigla for x in disciplinas]}"
-
-    # assert any(dis == expected), f"Esperado {expected}, mas obteve {disciplinasFiltradas} para {disciplinas}"
+def test_filtraTurmas(disciplinas, disciplinasCumpridas, semestreAtual, expected):
+    turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestreAtual)
+    turmasFiltadas_siglas = {turma.sigla for turma in turmasFiltradas}
+    assert expected.issubset(turmasFiltadas_siglas), f"Esperado {expected}, mas obteve {turmasFiltadas_siglas} ({len(turmasFiltradas)}) para {[x.sigla for x in disciplinas]}"

@@ -1,4 +1,4 @@
-def CalculaCIM(grafo):
+def calculaCIM(grafo):
     """
     Obtém os conjuntos independentes máximos do grafo recebido.
         

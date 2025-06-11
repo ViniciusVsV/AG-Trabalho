@@ -4,13 +4,15 @@ import re
 class Historico:
     def __init__(self, historico):
         self.historico = historico
+        
         self.nome = None
         self.curso = None
-        self.disciplinas_aprovadas = set()
 
-        self.le_historico()
+        self.disciplinasAprovadas = set()
 
-    def le_historico(self):
+        self.leHistorico()
+
+    def leHistorico(self):
         doc = mu.open(self.historico)
         lendo_disciplinas = False
         linha_atual = []
@@ -54,7 +56,7 @@ class Historico:
                             if match:
                                 sigla_match = re.search(r'\b([A-Z]{3,4}[0-9]{2,3}[A-Z]?)\b', registro)
                                 if sigla_match:
-                                    self.disciplinas_aprovadas.add(sigla_match.group(1))
+                                    self.disciplinasAprovadas.add(sigla_match.group(1))
                         linha_atual = [texto_linha]
                     elif linha_atual:
                         linha_atual.append(texto_linha)
@@ -66,4 +68,4 @@ class Historico:
                 if match:
                     sigla_match = re.search(r'\b([A-Z]{3,4}[0-9]{2,3}[A-Z]?)\b', registro)
                     if sigla_match:
-                        self.disciplinas_aprovadas.add(sigla_match.group(1))
+                        self.disciplinasAprovadas.add(sigla_match.group(1))

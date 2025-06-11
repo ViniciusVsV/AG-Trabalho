@@ -1,6 +1,6 @@
 from Objetos import Historico
 
-def LeHistorico(caminhoArquivo: str) -> tuple[str, set[str]]:
+def leHistorico(caminhoArquivo: str) -> tuple[str, set[str]]:
     """
     Lê o histório do discente em arquivo pdf para obter dados importantes
     Args:
@@ -13,4 +13,4 @@ def LeHistorico(caminhoArquivo: str) -> tuple[str, set[str]]:
 
     historico = Historico(caminhoArquivo)
 
-    return historico.curso, historico.disciplinas_aprovadas
+    return historico.curso, historico.disciplinasAprovadas

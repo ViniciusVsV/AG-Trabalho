@@ -1,9 +1,8 @@
-from Metodos import LeHistorico, MontaListaAdjDirigida, CalculaPesos, FiltraTurmas, MontaListaAdjSimples, CalculaCIM, GeraGrafo
+from Metodos import leHistorico, montaListaAdjDirigida, calculaPesos, filtraTurmas, montaListaAdjSimples, calculaCIM, geraGrafoPreRequisitos, geraGrafoConflitosHorario
 from Objetos import Disciplina
 from Metodos.mwis.branchAndBound import BranchAndBound
 
 import pandas as pd
-import uuid
 
 if __name__ == "__main__":
     while True:
@@ -17,16 +16,14 @@ if __name__ == "__main__":
             break
 
         else:
-            id = str(uuid.uuid4())
-
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
+            caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
             
             #disciplinasCumpridas = set()
             #curso = 'CCO'
             
-            (curso, disciplinasCumpridas) = LeHistorico(caminhoArquivo)
+            (curso, disciplinasCumpridas) = leHistorico(caminhoArquivo)
             print(f"Disciplinas cumpridas: {disciplinasCumpridas}")
 
             preferenciasOptativas = []
@@ -37,6 +34,8 @@ if __name__ == "__main__":
             if semestrePrevisao != 1 and semestrePrevisao != 2:
                 print("Digita certo carai")
                 continue
+
+            semestrePrevisao %= 2
 
             # Lê o dataset pertinente
             dataframe = pd.read_csv(
@@ -50,15 +49,12 @@ if __name__ == "__main__":
             disciplinasProcessadas: dict[tuple[str, str], Disciplina] = dict()
 
             qtdTurmas = 0
-
             for index, row in dataframe.iterrows():
                 if (row['SIGLA'], row['CAT']) in disciplinasProcessadas:
                     # Se a disciplina já foi processada, apenas adiciona o horário
-                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].adicionar_turma(
-                                                                            qtdTurmas # row['TURMA']
-                                                                          , row['HOR']
-                                                                          , row['PER']
-                                                                          )
+                    disciplinasProcessadas[(row['SIGLA'], row['CAT'])].\
+                        adicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
+                    
                     qtdTurmas += 1
                     continue
 
@@ -67,60 +63,58 @@ if __name__ == "__main__":
                     nome            =   row['NOME'],
                     curso           =   row['CURSO'],
                     categoria       =   row['CAT'],
-                    semestre        =   row['PER'],
+                    periodo         =   row['PER'],
                     anualidade      =   row['AN'],
-                    carga_horaria   =   row['CH'],
-                    pre_requisitos  =   row['REQ'],
+                    cargaHoraria    =   row['CH'],
+                    preRequisitos   =   row['REQ'],
                     equivalentes    =   row['EQV'],
-                    correquisito    =   row['COREQ'],
+                    correquisitos   =   row['COREQ'],
 
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.adicionar_turma(qtdTurmas, row['HOR'], row['PER'])
+                disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['PER'])
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
 
                 disciplinas.append(disciplina)
 
-
-            # for disciplina in disciplinas:
-            #     for turma in disciplina.cria_turmas():
-            #         print(disciplina.nome + "---" + str(turma.semestre))
-
             # Constrói o grafo de pré-requisitos
-            listaAdjDirigida = MontaListaAdjDirigida(disciplinas)
+            listaAdjDirigida = montaListaAdjDirigida(disciplinas)
 
-            # GeraGrafo(listaAdjDirigida, disciplinas, id, curso, True)
+            geraGrafoPreRequisitos(listaAdjDirigida, disciplinas, curso)
 
             # Calcula os pesos das disciplinas
-            disciplinas = CalculaPesos(listaAdjDirigida, disciplinas)
+            disciplinas = calculaPesos(listaAdjDirigida, disciplinas)
 
-            # Filtra as disciplinas
-            turmas = FiltraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+            # Filtra as disciplinas e obtém as turmas disponíveis
+            turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmas)]:
+            for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
                 print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
 
-            # Constrói o grafo de conflitos de horários
-            listaAdjSimples = MontaListaAdjSimples(turmas)
+            # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
+            listaAdjSimples = montaListaAdjSimples(turmasFiltradas, False)
+            geraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, False)
 
-            # GeraGrafo(listaAdjSimples, disciplinasFiltradas, id, curso, False)
+            listaAdjSimples = montaListaAdjSimples(turmasFiltradas, True)
+
+            geraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, True)
 
             # Calcula os conjuntos independentes
             conjuntoIM = BranchAndBound(
-                (turmas, listaAdjSimples)
+                (turmasFiltradas, listaAdjSimples)
             )
 
             print(f"Conjunto Independente Máximo (CIM):")
             for turma in conjuntoIM.cmi:
-                print(f"{turma.disciplina.sigla} - {turma.disciplina.nome} - {turma.horarios} ({turma.peso})")
+                print(f"{turma.disciplina.sigla} - {turma.disciplina.nome} - {turma.horario} ({turma.peso})")
             print(f"Peso do Conjunto Independente Máximo (CIM): {conjuntoIM.max_weight}")
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário
-            # pesosOrdenados = sorted(turmas, key=lambda d: d.peso, reverse=True)
+            # pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
 
             # for p in pesosOrdenados:
-            #     print(p.disciplina.sigla, "-", p.disciplina.nome, "--", p.disciplina.categoria, "---", p.disciplina.curso, "----", p.peso)
+            #     print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.peso)

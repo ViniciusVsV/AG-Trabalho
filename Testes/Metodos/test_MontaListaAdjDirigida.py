@@ -1,5 +1,5 @@
 import pytest
-from Metodos.MontaListaAdjDirigida import MontaListaAdjDirigida
+from Metodos.MontaListaAdjDirigida import montaListaAdjDirigida
 from Objetos import Disciplina
 
 @pytest.mark.parametrize("disciplinas, expected", [
@@ -10,12 +10,12 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-",
+                cargaHoraria=60,
+                preRequisitos="-",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -23,12 +23,12 @@ from Objetos import Disciplina
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101",
+                cargaHoraria=60,
+                preRequisitos="MAT101",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -36,12 +36,12 @@ from Objetos import Disciplina
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101",
+                cargaHoraria=60,
+                preRequisitos="MAT101",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -49,12 +49,12 @@ from Objetos import Disciplina
                 nome="Química I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=3,
+                periodo=3,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="FIS101 E MAT102",
+                cargaHoraria=60,
+                preRequisitos="FIS101 E MAT102",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
         ],
@@ -72,12 +72,12 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-",
+                cargaHoraria=60,
+                preRequisitos="-",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -85,12 +85,12 @@ from Objetos import Disciplina
                 nome="Física I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101",
+                cargaHoraria=60,
+                preRequisitos="MAT101",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -98,12 +98,12 @@ from Objetos import Disciplina
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101",
+                cargaHoraria=60,
+                preRequisitos="MAT101",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
         ],
@@ -120,12 +120,12 @@ from Objetos import Disciplina
                 nome="Matemática I",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=1,
+                periodo=1,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="-",
+                cargaHoraria=60,
+                preRequisitos="-",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
             Disciplina(
@@ -133,12 +133,12 @@ from Objetos import Disciplina
                 nome="Matemática II",
                 curso="CCO",
                 categoria="Obrigatória",
-                semestre=2,
+                periodo=2,
                 anualidade="NÃO",
-                carga_horaria=60,
-                pre_requisitos="MAT101",
+                cargaHoraria=60,
+                preRequisitos="MAT101",
                 equivalentes="-",
-                correquisito="-",
+                correquisitos="-",
                 peso=0.0
             ),
         ],
@@ -148,6 +148,6 @@ from Objetos import Disciplina
         ]
     ),
 ])
-def test_MontaListaAdjDirigida(disciplinas, expected):
-    listaAdj = MontaListaAdjDirigida(disciplinas)
+def test_montaListaAdjDirigida(disciplinas, expected):
+    listaAdj = montaListaAdjDirigida(disciplinas)
     assert listaAdj == expected, f"Esperado {expected}, mas obteve {listaAdj} para {disciplinas}"

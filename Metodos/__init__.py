@@ -1,7 +1,7 @@
-from .LeHistorico import LeHistorico
-from .MontaListaAdjDirigida import MontaListaAdjDirigida
-from .CalculaPesos import CalculaPesos
-from .FiltraTurmas import FiltraTurmas
-from .MontaListaAdjSimples import MontaListaAdjSimples
-from .GeraGrafo import GeraGrafo
-from .CalculaCIM import CalculaCIM
+from .LeHistorico import leHistorico
+from .MontaListaAdjDirigida import montaListaAdjDirigida
+from .CalculaPesos import calculaPesos
+from .FiltraTurmas import filtraTurmas
+from .MontaListaAdjSimples import montaListaAdjSimples
+from .GeraGrafo import geraGrafoPreRequisitos, geraGrafoConflitosHorario
+from .CalculaCIM import calculaCIM
