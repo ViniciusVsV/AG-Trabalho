@@ -1,11 +1,17 @@
 from Metodos import leHistorico, montaListaAdjDirigida, calculaPesos, filtraTurmas, montaListaAdjSimples, calculaCIM, geraGrafoPreRequisitos, geraGrafoConflitosHorario
-from Objetos import Disciplina
+from Objetos import Disciplina, Optativa
 from Metodos.mwis.branchAndBound import BranchAndBound
 
 import pandas as pd
 
 if __name__ == "__main__":
+    classeOptativa = Optativa()
+
     while True:
+        print()
+        print("------------------------------------------------------------------------------")
+        print()
+
         realizarTeste = input("Deseja realizar um teste (S/N)? ")
 
         if realizarTeste != "S" and realizarTeste != "s" and realizarTeste != "N" and realizarTeste != "n":
@@ -16,23 +22,14 @@ if __name__ == "__main__":
             break
 
         else:
-            # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
-            # Atualmente usando input. Temporário
-            # caminhoArquivo = "./Testes/Historicos/Historico_CCO_LV.pdf"
-            caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
+            # Caminho do arquivo pdf
             
-            #disciplinasCumpridas = set()
-            #curso = 'CCO'
+            caminhoArquivo = "./Testes/Historicos/Historico_CCO_1.pdf"
+            
+            # Obtém o curso e as disciplinas cumpridas pelo PDF e declara o número de períodos do curso
             
             (curso, disciplinasCumpridas) = leHistorico(caminhoArquivo)
             print(f"Disciplinas cumpridas: {disciplinasCumpridas}")
-
-            preferenciasOptativas = []
-            
-            semestrePrevisao = int(input("Digite o semestre do ano para previsão (1/2): "))
-            if semestrePrevisao != 1 and semestrePrevisao != 2:
-                print("Digita certo carai")
-                continue
 
             nPeriodos = (
                 8 if curso == "CCO"
@@ -40,16 +37,61 @@ if __name__ == "__main__":
                 else 10
             )
 
+            # Escolhe a trilha de optativa preferida
+
+            print()
+            print("------------------------------------------------------------------------------") #parece um penes kkkkkj
+            print()
+            print("Trilhas Possíveis:")
+
+            if curso == "CCO":
+                print("Resolução de Problemas", "---", "1")
+                print("Desenvolvimento de Sistemas", "---", "2")
+                print("Ciência, Tecnologia e Inovação", "---", "3")
+                print("Nenhumna", "---", "0")
+
+            elif curso == "SIN":    
+                print("Persistência e Análise de Dados", "---", "1")
+                print("Redes e Sistemas Computacionais", "---", "2")
+                print("Desenvolvimento e Engenharia de Software", "---", "3")
+                print("Nenhumna", "---", "0")
+
+            print()
+            print("------------------------------------------------------------------------------")
+            print()
+            numeroTrilha = int(input("Digite o número da trilha preferida: "))
+            
+            optativasPreferidas = classeOptativa.getTrilha(numeroTrilha, curso)
+
+            if optativasPreferidas == None:
+                print("Digita direito seu autista")
+                continue
+
+            print(optativasPreferidas)
+
+            print()
+            print("------------------------------------------------------------------------------")
+            print()
+            
+            # Obtém o semestre de previsão
+
+            semestrePrevisao = int(input("Digite o semestre do ano para previsão (1/2): "))
+            if semestrePrevisao != 1 and semestrePrevisao != 2:
+                print("Digita certo carai")
+                continue
+
             semestrePrevisao %= 2
 
             # Lê o dataset pertinente
+
             dataframe = pd.read_csv(
                 "Datasets/Disciplinas" + curso + ".csv" ,
                 na_values=[],
                 keep_default_na=False
             )
 
-            # Cria o array das disciplinas do curso
+            # Cria o array das disciplinas do curso e o popula a partir do dataset
+
             disciplinas: list[Disciplina] = []
             disciplinasProcessadas: dict[tuple[str, str], Disciplina] = dict()
 
@@ -62,7 +104,7 @@ if __name__ == "__main__":
                     
                     qtdTurmas += 1
                     continue
-
+ 
                 disciplina = Disciplina(
                     sigla           =   row['SIGLA'],
                     nome            =   row['NOME'],
@@ -75,7 +117,7 @@ if __name__ == "__main__":
                     equivalentes    =   row['EQV'],
                     correquisitos   =   row['COREQ'],
 
-                    peso            =   nPeriodos - row['PER'] + 1
+                    peso            =   nPeriodos - row["PER"] + 1
                 )
 
                 disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
@@ -86,31 +128,47 @@ if __name__ == "__main__":
                 disciplinas.append(disciplina)
 
             # Constrói o grafo de pré-requisitos
+
             listaAdjDirigida = montaListaAdjDirigida(disciplinas)
 
             geraGrafoPreRequisitos(listaAdjDirigida, disciplinas, curso)
 
             # Calcula os pesos das disciplinas
-            disciplinas = calculaPesos(listaAdjDirigida, disciplinas)
+
+            disciplinas = calculaPesos(listaAdjDirigida, disciplinas, numeroTrilha, curso)
+
+            turmas = []
+            for d in disciplinas:
+                for turma in d.criaTurmas():
+                    turmas.append(turma)
+
+            turmas = sorted(turmas, key=lambda t: t.peso, reverse=True)
+
+            for t in turmas:
+                print(t.sigla, "---", t.disciplina.nome, "---", t.disciplina.categoria, "---", t.peso)
+
+            continue
 
             # Filtra as disciplinas e obtém as turmas disponíveis
+
             turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            #for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
-            #    print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
+            # Constrói o grafo de conflitos de horários
 
-            # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
-            listaAdjSimples = montaListaAdjSimples(turmasFiltradas, False)
-            geraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, False)
+            listaAdjSimples = montaListaAdjSimples(turmasFiltradas)
 
-            listaAdjSimples = montaListaAdjSimples(turmasFiltradas, True)
-
-            geraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso, True)
+            geraGrafoConflitosHorario(listaAdjSimples, turmasFiltradas, curso)
 
             # Calcula os conjuntos independentes
+            
             conjuntoIM = BranchAndBound(
                 (turmasFiltradas, listaAdjSimples)
             )
+
+            print()
+            print("------------------------------------------------------------------------------")
+            print()
+
 
             print(f"Conjunto Independente Máximo (CIM):")
             for turma in conjuntoIM.cmi:
