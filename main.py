@@ -18,7 +18,8 @@ if __name__ == "__main__":
         else:
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
+            # caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
+            caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
             
             #disciplinasCumpridas = set()
             #curso = 'CCO'
@@ -73,7 +74,7 @@ if __name__ == "__main__":
                     peso            =   nPeriodos - row['PER'] + 1
                 )
 
-                disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['PER'])
+                disciplina.adicionaTurma(qtdTurmas, row['HOR'], row['SEM'])
                 qtdTurmas += 1
 
                 disciplinasProcessadas[(row['SIGLA'], row['CAT'])] = disciplina
@@ -111,6 +112,31 @@ if __name__ == "__main__":
             for turma in conjuntoIM.cmi:
                 print(f"{turma.disciplina.sigla} - {turma.disciplina.nome} - {turma.horario} ({turma.peso})")
             print(f"Peso do Conjunto Independente Máximo (CIM): {conjuntoIM.max_weight}")
+
+            print(f"\nOutros Conjuntos Máximos Independentes (CIMs):")
+            conjuntosIM = conjuntoIM.calculate_others_cmis(4)
+            for i, (turma, peso) in enumerate(conjuntosIM):
+                print(f"{i+1} - Peso: {peso:.3f} | Carga horária: {sum(t.disciplina.cargaHoraria for t in turma)}")
+                for t in turma:
+                    print(f"{t.disciplina.sigla}\t- {t.disciplina.nome} - {t.horario} ({t.disciplina.peso:.3f})")
+                print()
+
+            
+            jac_dist = []
+            # Calcular a similaridade entre os conjuntos independentes
+            for i in range(len(conjuntosIM)):
+                for j in range(i+1, len(conjuntosIM)):
+                        cj1 = set(t.sigla for t in conjuntosIM[i][0])
+                        cj2 = set(t.sigla for t in conjuntosIM[j][0])
+
+                        distancia_jaccard = len(cj1.intersection(cj2)) / len(cj1.union(cj2))
+                        print(f"Distância de Jaccard entre CIM {i+1} e CIM {j+1}: {distancia_jaccard:.2f}")
+                        jac_dist.append(distancia_jaccard)
+            
+            print(f"\nMaior distância de Jaccard entre CIMs: {max(jac_dist):.2f}")
+            print(f"Menor distância de Jaccard entre CIMs: {min(jac_dist):.2f}")
+            print(f"Média das distâncias de Jaccard entre CIMs: {sum(jac_dist) / len(jac_dist):.2f}")
+            print(f"Desvio padrão das distâncias de Jaccard entre CIMs: {pd.Series(jac_dist).std():.2f}")
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário

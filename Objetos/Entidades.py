@@ -26,7 +26,7 @@ class Disciplina:
         self.categoria = categoria
         self.periodo = periodo
         self.anualidade = anualidade == 'SIM'
-        self.cargaHorario = cargaHoraria
+        self.cargaHoraria = cargaHoraria
 
         self.preRequisitos = PreRequisito(preRequisitos)
         self.equivalentes = Equivalente(equivalentes)
