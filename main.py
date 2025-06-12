@@ -29,12 +29,16 @@ if __name__ == "__main__":
 
             preferenciasOptativas = []
             
-            nPeriodos = 8
-
             semestrePrevisao = int(input("Digite o semestre do ano para previsão (1/2): "))
             if semestrePrevisao != 1 and semestrePrevisao != 2:
                 print("Digita certo carai")
                 continue
+
+            nPeriodos = (
+                8 if curso == "CCO"
+                else 9 if curso == "SIN"
+                else 10
+            )
 
             semestrePrevisao %= 2
 
