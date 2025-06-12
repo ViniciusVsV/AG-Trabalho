@@ -2,7 +2,7 @@ from Objetos.Historico import Historico
 import pytest
 
 @pytest.mark.parametrize("caminho_pdf, expected_curso, expected_disciplinas", [
-    ("Testes/Historicos/historico_CCO-1.pdf", "CCO", {
+    ("Testes/Historicos/Historico_CCO_1.pdf", "CCO", {
         "CAHC04",
         "XDES01",
         "XMAC01",
