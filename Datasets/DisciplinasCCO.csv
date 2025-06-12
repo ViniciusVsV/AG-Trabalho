@@ -118,7 +118,6 @@ ECOT13A,Laboratório de Banco de Dados,ECO,EQUIVALENTE,5,1,NÃO,3T12,32,-,-,ECOT
 XPAD01,Banco de Dados I,SIN,EQUIVALENTE,5,0,NÃO,25N12,64,CTCO02 OU STCO02,-,-
 XMCO01,Inteligência Artificial,SIN,EQUIVALENTE,5,0,NÃO,3N1234,64,XMAC02 OU MAT013,-,-
 XAHC02,Interação Humano Computador,SIN,EQUIVALENTE,6,1,NÃO,2N34 5N12,64,XDES03 E (XDES04 OU (ECOT01A E ECOT11A)),-,-
-XAHC03,Metodologia Científica,SIN,EQUIVALENTE,7,0,NÃO,5N1234,64,-,-,-
 ADMO3E,Empreendedorismo Tecnológico,ADM,OPTATIVA,0,0,SIM,7M5 3N12,48,IEPG01,-,-
 ADMO3E,Empreendedorismo Tecnológico,SIN,OPTATIVA,0,0,SIM,3N345,48,IEPG01,-,-
 ADM08H,Psicologia - Processos Psicossociais Básicos: As relações indivíduo-Grupo,ADM,OPTATIVA,0,1,SIM,7T4 4N34,48,-,-,-
