@@ -18,7 +18,7 @@ if __name__ == "__main__":
         else:
             # Obtem input do usuário (curso, disciplinas já feitas, preferencias de optativas, nPeriodos do curso, semestre para previsão)
             # Atualmente usando input. Temporário
-            # caminhoArquivo = "./Testes/Historicos/historico_Vinicius.pdf"
+            # caminhoArquivo = "./Testes/Historicos/Historico_CCO_LV.pdf"
             caminhoArquivo = "./Testes/Historicos/historico_CCO-1.pdf"
             
             #disciplinasCumpridas = set()
@@ -92,8 +92,8 @@ if __name__ == "__main__":
             # Filtra as disciplinas e obtém as turmas disponíveis
             turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
 
-            for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
-                print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
+            #for disciplina in [d for d in disciplinas if d.sigla in set(d.sigla for d in turmasFiltradas)]:
+            #    print(f"{disciplina.sigla} - {disciplina.nome} - {disciplina.categoria} ({disciplina.peso})")
 
             # Constrói o grafo de conflitos de horários, primeiro sem ser interconectado
             listaAdjSimples = montaListaAdjSimples(turmasFiltradas, False)
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 
             # Retorna o resultado ao usuário
             # Atualmente só printa as disciplinas e seus pesos. Temporário
-            # pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
+            #pesosOrdenados = sorted(turmasFiltradas, key=lambda d: d.peso, reverse=True)
 
-            # for p in pesosOrdenados:
-            #     print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.peso)
+            #for p in pesosOrdenados:
+            #    print(p.sigla, "---", p.disciplina.nome, "---", p.disciplina.categoria, "---", p.horario, "---", p.semestre)
