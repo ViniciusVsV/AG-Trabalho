@@ -137,18 +137,6 @@ if __name__ == "__main__":
 
             disciplinas = calculaPesos(listaAdjDirigida, disciplinas, numeroTrilha, curso)
 
-            turmas = []
-            for d in disciplinas:
-                for turma in d.criaTurmas():
-                    turmas.append(turma)
-
-            turmas = sorted(turmas, key=lambda t: t.peso, reverse=True)
-
-            for t in turmas:
-                print(t.sigla, "---", t.disciplina.nome, "---", t.disciplina.categoria, "---", t.peso)
-
-            continue
-
             # Filtra as disciplinas e obtém as turmas disponíveis
 
             turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
