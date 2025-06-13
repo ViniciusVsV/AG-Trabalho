@@ -19,36 +19,56 @@
                 <label>Selecione as áreas de interesse:</label>
                 <div class="checkbox-group">
                     <input type="checkbox" id="adm" name="area" value="adm">
-                    <label for="dataScience">Administração e Gestão</label>
+                    <label for="adm">Administração e Gestão</label>
                 </div>
                 <div class="checkbox-group">
                     <input type="checkbox" id="otimizacao" name="area" value="otimizacao">
-                    <label for="dataScience">Metodologias Computacionais e Otimização</label>
+                    <label for="otimizacao">Metodologias Computacionais e Otimização</label>
                 </div>
 
                 <div class="checkbox-group">
                     <input type="checkbox" id="engenhariaSoft" name="area" value="engenhariaSoft">
-                    <label for="dataScience">Desenvolvimento e Engenharia De Software</label>
+                    <label for="engenhariaSoft">Desenvolvimento e Engenharia De Software</label>
                 </div>
                 
                 <div class="checkbox-group">
                     <input type="checkbox" id="dataScience" name="area" value="dataScience">
-                    <label for="algorithms">Persistência e Análise de Dados</label>
+                    <label for="dataScience">Persistência e Análise de Dados</label>
                 </div>
                 <div class="checkbox-group">
                     <input type="checkbox" id="redes" name="area" value="redes">
-                    <label for="mathematics">Redes e Sistemas Computacionais</label>
+                    <label for="redes">Redes e Sistemas Computacionais</label>
                 </div>
                 <div class="checkbox-group">
                     <input type="checkbox" id="humanas" name="area" value="humanas">
-                    <label for="mathematics">Aspectos Humanos em Computação</label>
+                    <label for="humanas">Aspectos Humanos em Computação</label>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="maxHours">Quantidade de Horas Máximas:</label>
+                <select id="maxHours" name="maxHours" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="128">128 horas</option>
+                    <option value="256">256 horas</option>
+                    <option value="320">320 horas</option>
+                    <option value="384">384 horas</option>
+                    <option value="416">416 horas</option>
+                    <option value="448">448 horas</option>
+                    <option value="512">512 horas</option>
+                </select>
             </div>
 
             <button type="submit">Enviar</button>
         </form>
 
         <div id="result" class="result-message"></div>
+
+        <div id="recommendationResultsArea" class="recommendation-section" style="margin-top: 20px; padding: 15px; border: 1px solid #eee; background-color: #f9f9f9; min-height: 150px;">
+            <h2>Resultados da Recomendação:</h2>
+            <p>As recomendações aparecerão aqui após o processamento.</p>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
