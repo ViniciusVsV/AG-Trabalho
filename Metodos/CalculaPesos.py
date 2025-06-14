@@ -60,14 +60,14 @@ def obtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
     multiplicadorAnualidade = 1.2 if disciplina.anualidade == "SIM" else 1.0
 
     multiplicadorOptativa = (
-        0.8 if disciplina.sigla in optativasPreferidas
-        else 0.6 if disciplina.sigla in classeOptativa.optativasComputacao
-        else 0.4
+        1.4 if disciplina.sigla in optativasPreferidas
+        else 1.2 if disciplina.sigla in classeOptativa.optativasComputacao
+        else 1.0
     )  
 
     multiplicadorCategoria = (
-        1.4 if disciplina.categoria == "OBRIGATORIA"
-        else 1.0 if disciplina.categoria == "EQUIVALENTE"
+        2.0 if disciplina.categoria == "OBRIGATORIA"
+        else 1.7 if disciplina.categoria == "EQUIVALENTE"
         else multiplicadorOptativa
     )   
 
