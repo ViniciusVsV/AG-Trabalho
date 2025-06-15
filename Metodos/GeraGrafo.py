@@ -39,7 +39,7 @@ def geraGrafoPreRequisitos(listaAdj: list[list[int]], disciplinas: list[Discipli
 
     desenhaGrafo(grafo, layout, curso, "GrafoPreRequisitos.png", True)
 
-def geraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], curso: str, interconectado: bool = False) -> None:
+def geraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], curso: str) -> None:
     grafo = Graph(directed = False)
 
     # Adiciona os vértices
@@ -74,7 +74,7 @@ def geraGrafoConflitosHorario(listaAdj: list[list[int]], turmas: list[Turma], cu
     # Define o layout para o grafo e retorna os dados
     layout = grafo.layout("fr")
 
-    nomeImagem = "GrafoConflitosHorariosInterconectado.png" if interconectado else "GrafoConflitosHorarios.png"
+    nomeImagem = "GrafoConflitosHorarios.png"
 
     desenhaGrafo(grafo, layout, curso, nomeImagem, False)
 

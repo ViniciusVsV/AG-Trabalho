@@ -1,6 +1,9 @@
-from Objetos import Disciplina
+from Objetos import Disciplina, Optativa
 
-def calculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> list[Disciplina]:
+classeOptativa = Optativa()
+optativasPreferidas = set[str]
+
+def calculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina], numeroTrilha: int, curso: str) -> list[Disciplina]:
     """
     Calcula os pesos dos vértices do grafo dirigido recebido com uma BFS.
     Os pesos serão calculados percorrendo o grafo de trás para frente (matéria mais ao fim do curso para a mais ao inícnio), somando ao vértice atual os pesos de todos os vértices predecessores.
@@ -11,6 +14,9 @@ def calculaPesos(listaAdj: list[list[int]], disciplinas: list[Disciplina]) -> li
     Retorna:
         Lista de disciplinas (vértices) com pesos calculados.
     """
+
+    global optativasPreferidas
+    optativasPreferidas = classeOptativa.getTrilha(numeroTrilha, curso)
 
     # Obtém os índices dos vértices com grau de entrada zero
     n = len(listaAdj)
@@ -49,12 +55,20 @@ def obtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
         Tupla com os multiplicadores de anualidade e categoria, respectivamente.
     """
 
+    global optativasPreferidas
+
     multiplicadorAnualidade = 1.2 if disciplina.anualidade == "SIM" else 1.0
 
+    multiplicadorOptativa = (
+        1.4 if disciplina.sigla in optativasPreferidas
+        else 1.2 if disciplina.sigla in classeOptativa.optativasComputacao
+        else 1.0
+    )  
+
     multiplicadorCategoria = (
-        1.2 if disciplina.categoria == "OBRIGATORIA"
-        else 0.8 if disciplina.categoria == "EQUIVALENTE"
-        else 0.6
-    )
+        2.0 if disciplina.categoria == "OBRIGATORIA"
+        else 1.7 if disciplina.categoria == "EQUIVALENTE"
+        else multiplicadorOptativa
+    )   
 
     return (multiplicadorAnualidade, multiplicadorCategoria)
