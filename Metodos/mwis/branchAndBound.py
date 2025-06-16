@@ -2,7 +2,7 @@ from Objetos import Turma
 import copy
 import random
 class BranchAndBound:
-    def __init__(self, G: tuple[list[Turma], list[list[int]]]):
+    def __init__(self, G: tuple[list[Turma], list[list[int]]], cargaHorariaMaxima: float):
         """
         Inicializa a classe BranchAndBound com o grafo fornecido.
         Args:
@@ -10,6 +10,7 @@ class BranchAndBound:
         """
         self.__G = (copy.deepcopy(G[0]), G[1].copy()) # É preciso do deepcopy para evitar problemas de referência
         self.__max_indep_set: list[Turma] = []
+        self.cargaHorariaMaxima = cargaHorariaMaxima
         self.__max_weight = 0.0
         self.__map = {turma: i for i, turma in enumerate(self.__G[0])}
         self.__branchAndBound(self.__G[0], [], 0.0)
@@ -115,7 +116,7 @@ class BranchAndBound:
 
         # Verifica se a turma conflita com o conjunto atual e se não ultrapassa o limite de carga horária.
         if not any(self.__map[t] in self.__G[1][self.__map[next_turma]] or t.disciplina.nome == next_turma.disciplina.nome for t in current_set) and\
-            sum(t.disciplina.cargaHoraria for t in current_set) + next_turma.disciplina.cargaHoraria <= 416:
+            sum(t.disciplina.cargaHoraria for t in current_set) + next_turma.disciplina.cargaHoraria <= self.cargaHorariaMaxima:
             new_set = current_set + [next_turma]
 
             # Remove turma atual e suas adjacências do restante

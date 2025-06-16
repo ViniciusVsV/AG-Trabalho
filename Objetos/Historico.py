@@ -7,6 +7,7 @@ class Historico:
         
         self.nome = None
         self.curso = None
+        self.matricula = None
 
         self.disciplinasAprovadas = set()
 
@@ -30,6 +31,11 @@ class Historico:
                     if self.nome is None:
                         if texto_linha.startswith("Nome:"):
                             self.nome = texto_linha.split(":", 1)[1].strip()
+                            continue
+                    
+                    if self.matricula is None:
+                        if texto_linha.startswith("Matrícula:"):
+                            self.matricula = texto_linha.split(":", 1)[1].strip()
                             continue
 
                     if self.curso is None:

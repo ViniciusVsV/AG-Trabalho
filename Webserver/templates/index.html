@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Sugestão de Matrícula</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sistema de Sugestão de Matrícula</h1>
+        <p>Preencha os campos abaixo e envie um PDF para obter sugestões de matrícula personalizadas.</p>
+        <form id="upload-form" action="/" method="post" enctype="multipart/form-data">
+            <label for="curso">Curso:</label>
+            <select id="curso" name="curso" class="input-field">
+                <option value="CCO">Ciência da Computação</option>
+                <option value="SIN">Sistema da Informação</option>
+                <option value="ENG">Engenharia da Computação</option>
+            </select>
+            <label for="semestre">Semestre:</label>
+            <input type="number" id="semestre" name="semestre" value="1" min="1" class="input-field">
+            <div id="cargahoraria-container">
+                <label for="cargahoraria">Carga horária semestral:</label>
+                <select id="cargahoraria" name="cargahoraria" class="input-field">
+                    <option value="128">128 horas</option>
+                    <option value="256">256 horas</option>
+                    <option value="320">320 horas</option>
+                    <option value="384">384 horas</option>
+                    <option value="416">416 horas</option>
+                    <option value="448">448 horas</option>
+                    <option value="512">512 horas</option>
+                </select>
+            </div>
+            <div id="trilha-container">
+                <label for="trilha">Trilha:</label>
+                <select id="trilha" name="trilha" class="input-field">
+                    <!-- Opções serão populadas dinamicamente pelo JavaScript -->
+                </select>
+            </div>
+            <label for="file">Arquivo PDF:</label>
+            <input type="file" id="file" name="file" accept=".pdf" required class="input-field">
+            <button type="submit" class="submit-btn">Enviar</button>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

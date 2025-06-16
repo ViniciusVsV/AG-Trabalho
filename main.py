@@ -1,10 +1,16 @@
 from Metodos import leHistorico, montaListaAdjDirigida, calculaPesos, filtraTurmas, montaListaAdjSimples, calculaCIM, geraGrafoPreRequisitos, geraGrafoConflitosHorario
 from Objetos import Disciplina, Optativa
 from Metodos.mwis.branchAndBound import BranchAndBound
+from sys import argv
 
 import pandas as pd
 
 if __name__ == "__main__":
+    # Check if argument server
+    if len(argv) > 1 and argv[1] == "server":
+        from Webserver.server import app
+        app.run(debug=True)
+        exit(0)
     classeOptativa = Optativa()
 
     while True:
@@ -150,7 +156,8 @@ if __name__ == "__main__":
             # Calcula os conjuntos independentes
             
             conjuntoIM = BranchAndBound(
-                (turmasFiltradas, listaAdjSimples)
+                (turmasFiltradas, listaAdjSimples),
+                416
             )
 
             print()
