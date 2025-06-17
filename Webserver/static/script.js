@@ -76,6 +76,7 @@ function generateSuggestionHTML(sugestao, index) {
         <th>Sigla</th>
         <th>Nome</th>
         <th>Turma</th>
+        <th>Curso</th>
         <th>Tipo</th>
         <th>Horário</th>
         </tr>
@@ -87,6 +88,7 @@ function generateSuggestionHTML(sugestao, index) {
         <td style="background-color: ${color};">${class_.sigla}</td>
         <td>${class_.nome}</td>
         <td>${class_.turma}</td>
+        <td>${class_.curso}</td>
         <td>${class_.tipo}</td>
         <td>${class_.horario}</td>
         </tr>

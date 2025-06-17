@@ -67,6 +67,7 @@ def index():
                             "sigla": turma.sigla,
                             "nome": turma.disciplina.nome,
                             "tipo": turma.disciplina.categoria,
+                            "curso": turma.disciplina.curso,
                             "turma": turma.numeroTurma,
                             "horario": str(turma.horario)
                         })
