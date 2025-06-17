@@ -1,6 +1,6 @@
 from Metodos import leHistorico, montaListaAdjDirigida, calculaPesos, filtraTurmas, montaListaAdjSimples, calculaCIM, geraGrafoPreRequisitos, geraGrafoConflitosHorario
 from Objetos import Disciplina, Optativa
-from Metodos.mwis.BranchAndBound import BranchAndBound
+from Metodos.MWIS.BranchAndBound import BranchAndBound
 
 import pandas as pd
 

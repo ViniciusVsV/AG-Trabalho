@@ -191,10 +191,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const form = document.getElementById('upload-form');
-    const loading = document.getElementById('loading');
     
-    form.addEventListener('submit', function(event) {
-        loading.style.display = 'block'
+    form.addEventListener('submit', function(event) { 
+        const loading = document.getElementById('loading');
+        const resultsDiv = document.getElementById('results');
+
+        resultsDiv.innerHTML = ``;
+        loading.style.display = 'block';
 
         event.preventDefault();
         const formData = new FormData(form);
@@ -204,7 +207,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            const resultsDiv = document.getElementById('results');
             if (data.error) {
                 resultsDiv.innerHTML = `<p>Erro: ${data.error}</p>`;
             } else {
