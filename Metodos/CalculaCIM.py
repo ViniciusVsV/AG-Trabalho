@@ -1,5 +1,5 @@
 from Objetos import Turma
-from Metodos.MWIS.BranchAndBound import BranchAndBound
+from Metodos.mwis.BranchAndBound import BranchAndBound
 
 def calculaCIM(grafo: tuple[list[Turma], list[list[int]]], carga_horaria: float) -> list[tuple[list[Turma], float]]:
     """
