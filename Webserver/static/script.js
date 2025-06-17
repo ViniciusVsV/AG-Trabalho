@@ -8,16 +8,16 @@ const colors = [
 
 const tracks = {
     "CCO": [
+        {value: "0", text: "Nenhuma"},
         {value: "1", text: "Resolução de Problemas"},
         {value: "2", text: "Desenvolvimento de Sistemas"},
-        {value: "3", text: "Ciência, Tecnologia e Inovação"},
-        {value: "0", text: "Nenhuma"}
+        {value: "3", text: "Ciência, Tecnologia e Inovação"}
     ],
     "SIN": [
+        {value: "0", text: "Nenhuma"},
         {value: "1", text: "Persistência e Análise de Dados"},
         {value: "2", text: "Redes e Sistemas Computacionais"},
-        {value: "3", text: "Desenvolvimento e Engenharia de Software"},
-        {value: "0", text: "Nenhuma"}
+        {value: "3", text: "Desenvolvimento e Engenharia de Software"}
     ]
 };
 
@@ -147,9 +147,6 @@ function generateSuggestionHTML(sugestao, index) {
 
 function generateResultsHTML(data) {
     let html = `
-    <h1>Informações do Estudante</h1>
-    <p>Nome: ${data.nome}</p>
-    <p>Matrícula: ${data.matricula}</p>
     `;
     const sortedSugestoes = data.sugestoes.sort((a, b) => b.peso - a.peso);
     sortedSugestoes.forEach((sugestao, index) => {
@@ -194,7 +191,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const form = document.getElementById('upload-form');
+    const loading = document.getElementById('loading');
+    
     form.addEventListener('submit', function(event) {
+        loading.style.display = 'block'
+
         event.preventDefault();
         const formData = new FormData(form);
         fetch('/', {
@@ -208,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultsDiv.innerHTML = `<p>Erro: ${data.error}</p>`;
             } else {
                 resultsDiv.innerHTML = generateResultsHTML(data);
+
+                loading.style.display = 'none'
             }
         })
         .catch(error => {

@@ -1,19 +1,23 @@
 from Metodos import leHistorico, montaListaAdjDirigida, calculaPesos, filtraTurmas, montaListaAdjSimples, calculaCIM, geraGrafoPreRequisitos, geraGrafoConflitosHorario
 from Objetos import Disciplina, Optativa
-from Metodos.mwis.branchAndBound import BranchAndBound
-from sys import argv
+from Metodos.MWIS.BranchAndBound import BranchAndBound
 
 import pandas as pd
 
 if __name__ == "__main__":
-    # Check if argument server
-    if len(argv) > 1 and argv[1] == "server":
+    # Trocar para True caso deseje testar o funcionamento do sistema pela main
+    mainTeste = False
+
+    # Roda o servidor web
+    if not mainTeste: 
         from Webserver.server import app
         app.run(debug=True)
-        exit(0)
-    classeOptativa = Optativa()
 
-    while True:
+        exit(0)        
+
+    while mainTeste:
+        classeOptativa = Optativa()
+
         print()
         print("------------------------------------------------------------------------------")
         print()
@@ -21,7 +25,7 @@ if __name__ == "__main__":
         realizarTeste = input("Deseja realizar um teste (S/N)? ")
 
         if realizarTeste != "S" and realizarTeste != "s" and realizarTeste != "N" and realizarTeste != "n":
-            print("Digita certo seu jumento")
+            print("Entrada inválida")
             continue
 
         elif realizarTeste == "N" or realizarTeste == "n":
@@ -37,6 +41,8 @@ if __name__ == "__main__":
             (curso, disciplinasCumpridas) = leHistorico(caminhoArquivo)
             print(f"Disciplinas cumpridas: {disciplinasCumpridas}")
 
+            disciplinasCumpridas = set(["XDES01", "CRSC03", "XMAC01", "CAHC04", "MAT00A"])
+
             nPeriodos = (
                 8 if curso == "CCO"
                 else 9 if curso == "SIN"
@@ -46,7 +52,7 @@ if __name__ == "__main__":
             # Escolhe a trilha de optativa preferida
 
             print()
-            print("------------------------------------------------------------------------------") #parece um penes kkkkkj
+            print("------------------------------------------------------------------------------")
             print()
             print("Trilhas Possíveis:")
 
@@ -70,7 +76,7 @@ if __name__ == "__main__":
             optativasPreferidas = classeOptativa.getTrilha(numeroTrilha, curso)
 
             if optativasPreferidas == None:
-                print("Digita direito seu autista")
+                print("Trilha inválida")
                 continue
 
             print(optativasPreferidas)
@@ -83,7 +89,7 @@ if __name__ == "__main__":
 
             semestrePrevisao = int(input("Digite o semestre do ano para previsão (1/2): "))
             if semestrePrevisao != 1 and semestrePrevisao != 2:
-                print("Digita certo carai")
+                print("Semestre inválido")
                 continue
 
             semestrePrevisao %= 2
@@ -142,10 +148,18 @@ if __name__ == "__main__":
             # Calcula os pesos das disciplinas
 
             disciplinas = calculaPesos(listaAdjDirigida, disciplinas, numeroTrilha, curso)
+            disciplinasSorted = sorted(disciplinas, key=lambda d: d.peso, reverse=True)
+
+            for d in disciplinasSorted:
+                print(d.sigla, "---", d.nome, "---", d.categoria, "---", d.peso)
+
 
             # Filtra as disciplinas e obtém as turmas disponíveis
 
             turmasFiltradas = filtraTurmas(disciplinas, disciplinasCumpridas, semestrePrevisao)
+
+            #for t in turmasFiltradas:
+            #    print(t.sigla, "---", t.disciplina.nome, "---", t.disciplina.categoria, "---", t.peso)
 
             # Constrói o grafo de conflitos de horários
 

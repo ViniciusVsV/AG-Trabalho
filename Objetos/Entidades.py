@@ -32,7 +32,11 @@ class Disciplina:
         self.equivalentes = Equivalente(equivalentes)
         self.correquisitos = set(corr.strip() for corr in correquisitos.split(',')) if correquisitos and correquisitos != '-' else set()
         
-        self.peso = 0.0 if categoria == "OPTATIVA" else peso
+        self.peso = (
+            peso if categoria == "OBRIGATORIA" else
+            peso / 4 if categoria == "EQUIVALENTE" else
+            0.0 
+        )
 
         self.turmas = turmas if turmas else []
 

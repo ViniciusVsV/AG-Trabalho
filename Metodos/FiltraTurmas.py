@@ -44,7 +44,7 @@ def filtraTurmas(disciplinas: list[Disciplina], disciplinasCumpridas: set[str], 
         turmas = disciplina.criaTurmas()
         for turma in turmas:
             # Filtra da lista as turmas que não estão sendo ofertadas
-            if turma.semestre != semestreAtual % 2:
+            if turma.semestre != semestreAtual:
                 continue
             
             turmasFiltradas.append(turma)

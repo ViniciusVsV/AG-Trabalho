@@ -18,7 +18,10 @@
                 <option value="ENG">Engenharia da Computação</option>
             </select>
             <label for="semestre">Semestre:</label>
-            <input type="number" id="semestre" name="semestre" value="1" min="1" class="input-field">
+            <select id="semestre" name="semestre" class="input-field">
+                <option value="1">1º Semestre</option>
+                <option value="0">2º Semestre</option>
+            </select>
             <div id="cargahoraria-container">
                 <label for="cargahoraria">Carga horária semestral:</label>
                 <select id="cargahoraria" name="cargahoraria" class="input-field">
@@ -41,6 +44,9 @@
             <input type="file" id="file" name="file" accept=".pdf" required class="input-field">
             <button type="submit" class="submit-btn">Enviar</button>
         </form>
+
+        <div class="loading" id="loading">Calculando, por favor aguarde...</div>
+
         <div id="results"></div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

@@ -95,7 +95,8 @@ table {
     font-size: 0.9em;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #e0e0e0;
     padding: 8px;
     text-align: left;
@@ -111,11 +112,13 @@ th {
     color: #333;
 }
 
-.schedule-table th, .schedule-table td {
+.schedule-table th,
+.schedule-table td {
     text-align: center;
 }
 
-.schedule-table th:first-child, .schedule-table td:first-child {
+.schedule-table th:first-child,
+.schedule-table td:first-child {
     white-space: normal;
     font-weight: bold;
     word-wrap: break-word;
@@ -134,18 +137,36 @@ th {
     .container {
         padding: 15px;
     }
+
     table {
         font-size: 0.85em;
     }
+
     .schedule-table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;
     }
+
     .input-field {
         max-width: 100%;
     }
-    .schedule-table th:first-child, .schedule-table td:first-child {
+
+    .schedule-table th:first-child,
+    .schedule-table td:first-child {
         width: 120px;
     }
+}
+
+.loading {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
 }

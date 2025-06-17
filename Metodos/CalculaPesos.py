@@ -39,7 +39,7 @@ def DFS(indiceV: int, listaAdj: list[list[int]], disciplinas: list[Disciplina], 
     [multiplicadorAnualidade, multiplicadorCategoria] = obtemMultiplicadores(disciplinas[indiceV])
 
     # Soma o peso base ao peso propagado vezes os multiplicadores
-    disciplinas[indiceV].peso += pesoPropagado * multiplicadorAnualidade * multiplicadorCategoria
+    disciplinas[indiceV].peso += pesoPropagado * multiplicadorCategoria * multiplicadorAnualidade
 
     # Chama a DFS para os adjacentes, com o peso propagado sendo o peso calculado para o vértice atual
     for adjacente in listaAdj[indiceV]:
@@ -60,14 +60,14 @@ def obtemMultiplicadores(disciplina: Disciplina) -> tuple[float, float]:
     multiplicadorAnualidade = 1.2 if disciplina.anualidade == "SIM" else 1.0
 
     multiplicadorOptativa = (
-        1.4 if disciplina.sigla in optativasPreferidas
-        else 1.2 if disciplina.sigla in classeOptativa.optativasComputacao
+        1.2 if disciplina.sigla in optativasPreferidas
+        else 1.1 if disciplina.sigla in classeOptativa.optativasComputacao
         else 1.0
     )  
 
     multiplicadorCategoria = (
-        2.0 if disciplina.categoria == "OBRIGATORIA"
-        else 1.7 if disciplina.categoria == "EQUIVALENTE"
+        1.0 if disciplina.categoria == "OBRIGATORIA"
+        else 0.2 if disciplina.categoria == "EQUIVALENTE"
         else multiplicadorOptativa
     )   
 
